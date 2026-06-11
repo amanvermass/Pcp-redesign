@@ -66,27 +66,27 @@ export default function AiProductFinder() {
         {/* Header Title */}
         <div className="space-y-3 text-left">
           <div className="inline-flex items-center gap-1.5 text-xs font-mono text-primary uppercase tracking-widest">
-            <Cpu className="w-3.5 h-3.5 animate-pulse" />
+            <Cpu className="w-3.5 h-3.5" />
             AURA Digital Advisor
           </div>
-          <h1 className="heading-premium text-4xl md:text-5xl text-white font-semibold">AI Product Finder</h1>
+          <h1 className="heading-premium text-4xl md:text-5xl text-foreground font-semibold">AI Product Finder</h1>
           <p className="text-sm text-muted-foreground max-w-xl">
             A multi-step specification wizard recommending clay profiles and technical solutions matched to structural styles and local climatic indices.
           </p>
         </div>
 
         {/* Wizard Container */}
-        <div className="max-w-xl mx-auto glass-panel p-8 rounded-2xl border border-white/10 min-h-[400px] flex flex-col justify-between text-left relative overflow-hidden">
+        <div className="max-w-xl mx-auto glass-panel p-8 rounded-none border border-border min-h-[400px] flex flex-col justify-between text-left relative overflow-hidden shadow-sm">
           
           {/* Progress Indicator */}
-          <div className="flex justify-between items-center pb-6 border-b border-white/5 text-[10px] font-mono text-muted-foreground uppercase">
+          <div className="flex justify-between items-center pb-6 border-b border-border text-[10px] font-mono text-muted-foreground uppercase">
             <span>Step {step} of 5</span>
             <div className="flex gap-1.5">
               {[1, 2, 3, 4, 5].map((s) => (
                 <span
                   key={s}
-                  className={`w-4 h-1.5 rounded transition-all duration-300 ${
-                    s <= step ? "bg-primary" : "bg-white/10"
+                  className={`w-4 h-1.5 rounded-none transition-all duration-300 ${
+                    s <= step ? "bg-primary" : "bg-sand"
                   }`}
                 />
               ))}
@@ -106,7 +106,7 @@ export default function AiProductFinder() {
                   variants={slideVariants}
                   className="space-y-4"
                 >
-                  <h3 className="heading-premium text-xl text-white">What is your structural building type?</h3>
+                  <h3 className="heading-premium text-xl text-foreground">What is your structural building type?</h3>
                   <div className="grid grid-cols-2 gap-3 pt-2">
                     {[
                       { id: "Residential", label: "Residential Estate" },
@@ -120,10 +120,10 @@ export default function AiProductFinder() {
                           setBuildingType(b.id);
                           setStep(2);
                         }}
-                        className={`p-4 rounded-xl border text-xs font-semibold text-center transition-all ${
+                        className={`p-4 rounded-none border border-border text-xs font-semibold text-center transition-all cursor-pointer ${
                           buildingType === b.id
-                            ? "bg-primary/20 border-primary text-primary"
-                            : "bg-white/5 border-white/5 text-secondary-foreground hover:border-white/20"
+                            ? "bg-primary/5 border-primary text-primary"
+                            : "bg-sand border-border text-secondary-foreground hover:border-primary/20 hover:text-primary"
                         }`}
                       >
                         {b.label}
@@ -143,7 +143,7 @@ export default function AiProductFinder() {
                   variants={slideVariants}
                   className="space-y-4"
                 >
-                  <h3 className="heading-premium text-xl text-white">Select project scope footprint</h3>
+                  <h3 className="heading-premium text-xl text-foreground">Select project scope footprint</h3>
                   <div className="grid grid-cols-1 gap-2 pt-2">
                     {[
                       { id: "small", label: "Bespoke Scale (< 500 sqm)" },
@@ -156,10 +156,10 @@ export default function AiProductFinder() {
                           setProjectSize(sz.id);
                           setStep(3);
                         }}
-                        className={`p-3 rounded-lg border text-left text-xs font-semibold transition-all ${
+                        className={`p-3 rounded-none border border-border text-left text-xs font-semibold transition-all cursor-pointer ${
                           projectSize === sz.id
-                            ? "bg-primary/20 border-primary text-primary"
-                            : "bg-white/5 border-white/5 text-secondary-foreground hover:border-white/25"
+                            ? "bg-primary/5 border-primary text-primary"
+                            : "bg-sand border-border text-secondary-foreground hover:border-primary/20 hover:text-primary"
                         }`}
                       >
                         {sz.label}
@@ -179,7 +179,7 @@ export default function AiProductFinder() {
                   variants={slideVariants}
                   className="space-y-4"
                 >
-                  <h3 className="heading-premium text-xl text-white">What local climatic indices apply?</h3>
+                  <h3 className="heading-premium text-xl text-foreground">What local climatic indices apply?</h3>
                   <div className="grid grid-cols-2 gap-3 pt-2">
                     {[
                       { id: "Tropical", label: "Tropical Monsoon" },
@@ -193,10 +193,10 @@ export default function AiProductFinder() {
                           setClimate(cl.id);
                           setStep(4);
                         }}
-                        className={`p-4 rounded-xl border text-xs font-semibold text-center transition-all ${
+                        className={`p-4 rounded-none border border-border text-xs font-semibold text-center transition-all cursor-pointer ${
                           climate === cl.id
-                            ? "bg-primary/20 border-primary text-primary"
-                            : "bg-white/5 border-white/5 text-secondary-foreground hover:border-white/20"
+                            ? "bg-primary/5 border-primary text-primary"
+                            : "bg-sand border-border text-secondary-foreground hover:border-primary/20 hover:text-primary"
                         }`}
                       >
                         {cl.label}
@@ -216,7 +216,7 @@ export default function AiProductFinder() {
                   variants={slideVariants}
                   className="space-y-4"
                 >
-                  <h3 className="heading-premium text-xl text-white">Select envelope facade aesthetics</h3>
+                  <h3 className="heading-premium text-xl text-foreground">Select envelope facade aesthetics</h3>
                   <div className="grid grid-cols-2 gap-3 pt-2">
                     {[
                       { id: "Minimalist", label: "Minimalist Monolithic" },
@@ -230,10 +230,10 @@ export default function AiProductFinder() {
                           setStyle(st.id);
                           setStep(5);
                         }}
-                        className={`p-4 rounded-xl border text-xs font-semibold text-center transition-all ${
+                        className={`p-4 rounded-none border border-border text-xs font-semibold text-center transition-all cursor-pointer ${
                           style === st.id
-                            ? "bg-primary/20 border-primary text-primary"
-                            : "bg-white/5 border-white/5 text-secondary-foreground hover:border-white/20"
+                            ? "bg-primary/5 border-primary text-primary"
+                            : "bg-sand border-border text-secondary-foreground hover:border-primary/20 hover:text-primary"
                         }`}
                       >
                         {st.label}
@@ -263,14 +263,14 @@ export default function AiProductFinder() {
                       <Link
                         key={rec.id}
                         href={`/products/${rec.id}`}
-                        className="flex gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-primary/20 hover:bg-white/[0.08] transition-all duration-300 group"
+                        className="flex gap-3 p-3 rounded-none bg-sand/30 border border-border hover:border-primary/45 hover:bg-sand/60 transition-all duration-300 group shadow-sm"
                       >
-                        <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0">
+                        <div className="w-14 h-14 rounded-none overflow-hidden shrink-0 bg-muted">
                           <img src={rec.images[0]} alt="" className="w-full h-full object-cover" />
                         </div>
                         <div className="text-left space-y-1">
                           <span className="text-[9px] text-muted-foreground font-mono uppercase">{rec.subcategory}</span>
-                          <h4 className="text-xs font-bold text-white group-hover:text-primary transition-colors">{rec.name}</h4>
+                          <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">{rec.name}</h4>
                           <p className="text-[10px] text-muted-foreground line-clamp-1">{rec.description}</p>
                         </div>
                       </Link>
@@ -289,11 +289,11 @@ export default function AiProductFinder() {
           </div>
 
           {/* Navigation Controls */}
-          <div className="flex items-center justify-between pt-6 border-t border-white/5">
+          <div className="flex items-center justify-between pt-6 border-t border-border">
             {step > 1 ? (
               <button
                 onClick={() => setStep((s) => s - 1)}
-                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-white font-mono"
+                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary font-mono cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 Previous Step
@@ -305,7 +305,7 @@ export default function AiProductFinder() {
             {step === 5 && (
               <button
                 onClick={resetWizard}
-                className="flex items-center gap-1.5 text-xs text-primary hover:text-gold-light font-mono font-semibold"
+                className="flex items-center gap-1.5 text-xs text-primary hover:text-brick font-mono font-semibold cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 Find New Match

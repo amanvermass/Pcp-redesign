@@ -22,7 +22,7 @@ import {
 import { ResponsiveContainer, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { mockProducts } from "@/data/mockProducts";
+import { mockProducts, Product } from "@/data/mockProducts";
 import { mockProjects } from "@/data/mockProjects";
 import { mockBlogs } from "@/data/mockBlogs";
 import { mockDealers } from "@/data/mockDealers";
@@ -61,10 +61,10 @@ export default function AdminDashboard() {
   const handleAddProduct = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newProductName) return;
-    const newProd = {
+    const newProd: Product = {
       id: `custom-prod-${Date.now()}`,
       name: newProductName,
-      category: newProductCategory as any,
+      category: newProductCategory as "facade" | "roof" | "brick" | "paver",
       subcategory: "Custom Cladding",
       description: "Added via Admin Panel console manager.",
       images: ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80"],
@@ -123,24 +123,24 @@ export default function AdminDashboard() {
             <Briefcase className="w-3.5 h-3.5" />
             Platform Control Console
           </div>
-          <h1 className="heading-premium text-3xl md:text-4xl text-white font-semibold">Console Manager</h1>
+          <h1 className="heading-premium text-3xl md:text-4xl text-foreground font-semibold">Console Manager</h1>
         </div>
 
         {/* Console grid (Sidebar + Workspace Panels) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Navigation Menu */}
-          <div className="lg:col-span-3 space-y-1.5 text-left border-r border-white/5 pr-4 h-fit">
+          <div className="lg:col-span-3 space-y-1.5 text-left border-r border-border pr-4 h-fit">
             {sidebarNav.map((nav) => {
               const IconComp = nav.icon;
               return (
                 <button
                   key={nav.id}
                   onClick={() => setActiveScreen(nav.id)}
-                  className={`w-full flex items-center gap-3 p-3 rounded-lg text-xs font-semibold tracking-wide transition-all ${
+                  className={`w-full flex items-center gap-3 p-3 rounded-none text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                     activeScreen === nav.id
-                      ? "bg-primary text-black font-bold shadow-md"
-                      : "text-secondary-foreground hover:bg-white/5 hover:text-white"
+                      ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                      : "text-secondary-foreground hover:bg-sand/50 hover:text-primary"
                   }`}
                 >
                   <IconComp className="w-4.5 h-4.5 shrink-0" />
@@ -151,50 +151,50 @@ export default function AdminDashboard() {
           </div>
 
           {/* Workspaces Display Panel */}
-          <div className="lg:col-span-9 p-6 glass-panel rounded-2xl border border-white/10 text-left space-y-6">
+          <div className="lg:col-span-9 p-6 glass-panel rounded-none border border-border text-left space-y-6 shadow-sm">
             
             {/* OVERVIEW SCREEN */}
             {activeScreen === "dashboard" && (
               <div className="space-y-8">
-                <h3 className="heading-premium text-xl text-white">Platform Summary</h3>
+                <h3 className="heading-premium text-xl text-foreground">Platform Summary</h3>
 
                 {/* Dashboard Metrics grid */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-mono">
-                  <div className="p-4 bg-white/5 rounded-xl border border-white/5 space-y-1">
+                  <div className="p-4 bg-sand border border-border rounded-none space-y-1 shadow-sm">
                     <span className="text-muted-foreground uppercase">Material count</span>
-                    <p className="text-2xl text-white font-bold">{products.length}</p>
+                    <p className="text-2xl text-foreground font-bold">{products.length}</p>
                   </div>
-                  <div className="p-4 bg-white/5 rounded-xl border border-white/5 space-y-1">
+                  <div className="p-4 bg-sand border border-border rounded-none space-y-1 shadow-sm">
                     <span className="text-muted-foreground uppercase">Case landmarks</span>
-                    <p className="text-2xl text-white font-bold">{projects.length}</p>
+                    <p className="text-2xl text-foreground font-bold">{projects.length}</p>
                   </div>
-                  <div className="p-4 bg-white/5 rounded-xl border border-white/5 space-y-1">
+                  <div className="p-4 bg-sand border border-border rounded-none space-y-1 shadow-sm">
                     <span className="text-muted-foreground uppercase">Pending Inquiries</span>
                     <p className="text-2xl text-primary font-bold">{leads.filter(l => l.status !== "Resolved").length}</p>
                   </div>
-                  <div className="p-4 bg-white/5 rounded-xl border border-white/5 space-y-1">
+                  <div className="p-4 bg-sand border border-border rounded-none space-y-1 shadow-sm">
                     <span className="text-muted-foreground uppercase">Active Showrooms</span>
-                    <p className="text-2xl text-white font-bold">{dealers.length}</p>
+                    <p className="text-2xl text-foreground font-bold">{dealers.length}</p>
                   </div>
                 </div>
 
                 {/* Area Chart: Specs downloads trends */}
                 <div className="space-y-4">
-                  <h4 className="text-xs font-semibold text-white tracking-widest uppercase">Specifier Activity Index</h4>
-                  <div className="w-full h-64 bg-white/[0.01] border border-white/5 p-4 rounded-xl">
+                  <h4 className="text-xs font-semibold text-foreground tracking-widest uppercase">Specifier Activity Index</h4>
+                  <div className="w-full h-64 bg-card border border-border p-4 rounded-none shadow-sm">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={salesData}>
                         <defs>
                           <linearGradient id="colorSpecs" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#D4AF37" stopOpacity={0.3}/>
-                            <stop offset="95%" stopColor="#D4AF37" stopOpacity={0}/>
+                            <stop offset="5%" stopColor="#B55A30" stopOpacity={0.3}/>
+                            <stop offset="95%" stopColor="#B55A30" stopOpacity={0}/>
                           </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#232731" />
-                        <XAxis dataKey="month" stroke="#707585" fontSize={10} />
-                        <YAxis stroke="#707585" fontSize={10} />
-                        <Tooltip contentStyle={{ backgroundColor: "#10121A", borderColor: "rgba(255,255,255,0.1)" }} />
-                        <Area type="monotone" dataKey="specs" stroke="#D4AF37" strokeWidth={2} fillOpacity={1} fill="url(#colorSpecs)" name="Spec Downloads" />
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(74, 44, 29, 0.12)" />
+                        <XAxis dataKey="month" stroke="#555555" fontSize={10} />
+                        <YAxis stroke="#555555" fontSize={10} />
+                        <Tooltip contentStyle={{ backgroundColor: "#FFFFFF", borderColor: "rgba(74, 44, 29, 0.12)", color: "#1F1F1F" }} />
+                        <Area type="monotone" dataKey="specs" stroke="#B55A30" strokeWidth={2} fillOpacity={1} fill="url(#colorSpecs)" name="Spec Downloads" />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
@@ -205,12 +205,12 @@ export default function AdminDashboard() {
             {/* PRODUCTS MANAGER SCREEN */}
             {activeScreen === "products" && (
               <div className="space-y-6">
-                <div className="flex justify-between items-center pb-2 border-b border-white/5">
-                  <h3 className="heading-premium text-xl text-white">Products Catalog Database</h3>
+                <div className="flex justify-between items-center pb-2 border-b border-border">
+                  <h3 className="heading-premium text-xl text-foreground">Products Catalog Database</h3>
                 </div>
 
                 {/* Quick Add Product Form */}
-                <form onSubmit={handleAddProduct} className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-white/5 p-4 rounded-xl border border-white/5 items-end">
+                <form onSubmit={handleAddProduct} className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-sand p-4 rounded-none border border-border items-end shadow-sm">
                   <div className="space-y-1 md:col-span-2 text-xs">
                     <label className="text-[9px] font-mono text-muted-foreground uppercase">Product Name</label>
                     <input
@@ -219,7 +219,7 @@ export default function AdminDashboard() {
                       placeholder="e.g. Bronze Glazed Baguette"
                       value={newProductName}
                       onChange={(e) => setNewProductName(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-white outline-none"
+                      className="w-full bg-card border border-border rounded-none p-2 text-foreground outline-none"
                     />
                   </div>
 
@@ -228,7 +228,7 @@ export default function AdminDashboard() {
                     <select
                       value={newProductCategory}
                       onChange={(e) => setNewProductCategory(e.target.value)}
-                      className="w-full bg-[#10121A] border border-white/10 rounded-lg p-2 text-white outline-none"
+                      className="w-full bg-card border border-border rounded-none p-2 text-foreground outline-none"
                     >
                       <option value="facade">Facade</option>
                       <option value="roof">Roof</option>
@@ -239,7 +239,7 @@ export default function AdminDashboard() {
 
                   <button
                     type="submit"
-                    className="w-full py-2 bg-primary hover:bg-gold-light text-black text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors"
+                    className="w-full py-2 bg-primary hover:bg-brick text-primary-foreground text-xs font-semibold rounded-none flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
                     Insert Spec
@@ -251,10 +251,10 @@ export default function AdminDashboard() {
                   {products.map((p) => (
                     <div
                       key={p.id}
-                      className="flex items-center justify-between p-3.5 rounded-xl bg-white/5 border border-white/5 text-xs text-white"
+                      className="flex items-center justify-between p-3.5 rounded-none bg-card border border-border text-xs text-foreground shadow-sm"
                     >
                       <div className="flex items-center gap-3">
-                        <img src={p.images[0]} alt="" className="w-10 h-10 rounded object-cover border border-white/10 shrink-0" />
+                        <img src={p.images[0]} alt="" className="w-10 h-10 rounded-none object-cover border border-border shrink-0" />
                         <div>
                           <h4 className="font-semibold">{p.name}</h4>
                           <span className="text-[9px] text-primary font-mono uppercase mt-0.5 block">{p.subcategory} • {p.priceEstimate}</span>
@@ -263,7 +263,7 @@ export default function AdminDashboard() {
 
                       <button
                         onClick={() => handleDeleteProduct(p.id)}
-                        className="p-1.5 text-muted-foreground hover:text-red-500 rounded hover:bg-white/5 transition-all"
+                        className="p-1.5 text-muted-foreground hover:text-red-500 rounded-none hover:bg-sand transition-all cursor-pointer"
                         title="Delete specs record"
                       >
                         <Trash2 className="w-4.5 h-4.5" />
@@ -277,16 +277,16 @@ export default function AdminDashboard() {
             {/* PROJECTS CASE WORKSPACE */}
             {activeScreen === "projects" && (
               <div className="space-y-6">
-                <h3 className="heading-premium text-xl text-white">Project Case Profiles</h3>
+                <h3 className="heading-premium text-xl text-foreground">Project Case Profiles</h3>
 
                 <div className="space-y-3 max-h-[55vh] overflow-y-auto pr-1">
                   {projects.map((proj) => (
                     <div
                       key={proj.id}
-                      className="flex items-center justify-between p-3.5 rounded-xl bg-white/5 border border-white/5 text-xs text-white"
+                      className="flex items-center justify-between p-3.5 rounded-none bg-card border border-border text-xs text-foreground shadow-sm"
                     >
                       <div className="flex items-center gap-3">
-                        <img src={proj.images[0]} alt="" className="w-12 h-9 rounded object-cover border border-white/10 shrink-0" />
+                        <img src={proj.images[0]} alt="" className="w-12 h-9 rounded-none object-cover border border-border shrink-0" />
                         <div>
                           <h4 className="font-semibold">{proj.title}</h4>
                           <span className="text-[9px] text-muted-foreground font-mono uppercase mt-0.5 block">{proj.location} • By {proj.architect}</span>
@@ -296,7 +296,7 @@ export default function AdminDashboard() {
                       <div className="flex gap-2">
                         <Link
                           href={`/projects/${proj.id}`}
-                          className="p-1.5 text-muted-foreground hover:text-primary rounded hover:bg-white/5 transition-all"
+                          className="p-1.5 text-muted-foreground hover:text-primary rounded-none hover:bg-sand transition-all"
                         >
                           <Eye className="w-4 h-4" />
                         </Link>
@@ -310,21 +310,21 @@ export default function AdminDashboard() {
             {/* BLOGS VIEW */}
             {activeScreen === "blogs" && (
               <div className="space-y-6">
-                <h3 className="heading-premium text-xl text-white">Blogs & Article Drafts</h3>
+                <h3 className="heading-premium text-xl text-foreground">Blogs & Article Drafts</h3>
                 <div className="space-y-3">
                   {blogs.map((b) => (
                     <div
                       key={b.slug}
-                      className="flex items-center justify-between p-3.5 rounded-xl bg-white/5 border border-white/5 text-xs text-white"
+                      className="flex items-center justify-between p-3.5 rounded-none bg-card border border-border text-xs text-foreground shadow-sm"
                     >
                       <div className="flex items-center gap-3">
-                        <img src={b.coverImage} alt="" className="w-12 h-9 rounded object-cover border border-white/10 shrink-0" />
+                        <img src={b.coverImage} alt="" className="w-12 h-9 rounded-none object-cover border border-border shrink-0" />
                         <div>
                           <h4 className="font-semibold truncate max-w-[280px]">{b.title}</h4>
                           <span className="text-[9px] text-primary font-mono uppercase mt-0.5 block">{b.category} • {b.date}</span>
                         </div>
                       </div>
-                      <Link href={`/blog/${b.slug}`} className="p-1.5 text-muted-foreground hover:text-primary rounded hover:bg-white/5 transition-all">
+                      <Link href={`/blog/${b.slug}`} className="p-1.5 text-muted-foreground hover:text-primary rounded-none hover:bg-sand transition-all">
                         <Eye className="w-4.5 h-4.5" />
                       </Link>
                     </div>
@@ -336,17 +336,17 @@ export default function AdminDashboard() {
             {/* LEADS PANEL */}
             {activeScreen === "leads" && (
               <div className="space-y-6">
-                <h3 className="heading-premium text-xl text-white">Specification Inquiries</h3>
+                <h3 className="heading-premium text-xl text-foreground">Specification Inquiries</h3>
 
                 <div className="space-y-3">
                   {leads.map((l) => (
                     <div
                       key={l.id}
-                      className="p-4 rounded-xl bg-white/5 border border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs text-white"
+                      className="p-4 rounded-none bg-card border border-border flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs text-foreground shadow-sm"
                     >
                       <div className="space-y-1 text-left">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-white">{l.name}</span>
+                          <span className="font-semibold text-foreground">{l.name}</span>
                           <span className="text-[10px] text-muted-foreground">({l.email})</span>
                         </div>
                         <h4 className="font-medium text-secondary-foreground">{l.subject}</h4>
@@ -354,19 +354,19 @@ export default function AdminDashboard() {
                       </div>
 
                       <div className="flex items-center gap-3 justify-between md:justify-end">
-                        <span className={`px-2 py-0.5 rounded-full text-[9px] font-mono tracking-wide ${
+                        <span className={`px-2 py-0.5 rounded-none text-[9px] font-mono tracking-wide ${
                           l.status === "New"
-                            ? "bg-red-500/20 text-red-400 border border-red-500/30"
+                            ? "bg-red-500/20 text-red-550 border border-red-500/30"
                             : l.status === "Contacted"
                             ? "bg-primary/20 text-primary border border-primary/30"
-                            : "bg-green-500/20 text-green-400 border border-green-500/30"
+                            : "bg-green-500/20 text-green-700 border border-green-500/30"
                         }`}>
                           {l.status}
                         </span>
 
                         <button
                           onClick={() => handleToggleLeadStatus(l.id)}
-                          className="px-3 py-1.5 rounded bg-white/5 border border-white/10 hover:border-primary text-[10px] font-mono hover:text-black hover:bg-primary transition-all text-white"
+                          className="px-3 py-1.5 rounded-none bg-card border border-border hover:border-primary text-[10px] font-mono hover:text-primary-foreground hover:bg-primary transition-all text-foreground cursor-pointer"
                         >
                           Cycle status
                         </button>
@@ -380,19 +380,19 @@ export default function AdminDashboard() {
             {/* DEALERS PANEL */}
             {activeScreen === "dealers" && (
               <div className="space-y-6">
-                <h3 className="heading-premium text-xl text-white">Showroom Territories</h3>
+                <h3 className="heading-premium text-xl text-foreground">Showroom Territories</h3>
                 <div className="space-y-3">
                   {dealers.map((d) => (
                     <div
                       key={d.id}
-                      className="p-3.5 rounded-xl bg-white/5 border border-white/5 flex justify-between items-center text-xs text-white"
+                      className="p-3.5 rounded-none bg-card border border-border flex justify-between items-center text-xs text-foreground shadow-sm"
                     >
                       <div className="space-y-1">
                         <span className="text-[9px] text-primary font-mono uppercase tracking-widest">{d.type}</span>
                         <h4 className="font-semibold">{d.name}</h4>
                         <p className="text-[10px] text-muted-foreground">{d.address}</p>
                       </div>
-                      <Link href="/dealers" className="p-1.5 text-muted-foreground hover:text-primary rounded hover:bg-white/5 transition-all">
+                      <Link href="/dealers" className="p-1.5 text-muted-foreground hover:text-primary rounded-none hover:bg-sand transition-all">
                         <MapPin className="w-4.5 h-4.5" />
                       </Link>
                     </div>
@@ -404,18 +404,18 @@ export default function AdminDashboard() {
             {/* ANALYTICS SCREEN */}
             {activeScreen === "analytics" && (
               <div className="space-y-8">
-                <h3 className="heading-premium text-xl text-white">Metrics Insights</h3>
+                <h3 className="heading-premium text-xl text-foreground">Metrics Insights</h3>
 
                 <div className="space-y-4">
-                  <h4 className="text-xs font-semibold text-white tracking-widest uppercase">Inquiry Conversion trends</h4>
-                  <div className="w-full h-64 bg-white/[0.01] border border-white/5 p-4 rounded-xl">
+                  <h4 className="text-xs font-semibold text-foreground tracking-widest uppercase">Inquiry Conversion trends</h4>
+                  <div className="w-full h-64 bg-card border border-border p-4 rounded-none shadow-sm">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={salesData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#232731" />
-                        <XAxis dataKey="month" stroke="#707585" fontSize={10} />
-                        <YAxis stroke="#707585" fontSize={10} />
-                        <Tooltip contentStyle={{ backgroundColor: "#10121A", borderColor: "rgba(255,255,255,0.1)" }} />
-                        <Bar dataKey="leads" fill="#D4AF37" name="Design Brief Leads" radius={[4, 4, 0, 0]} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(74, 44, 29, 0.12)" />
+                        <XAxis dataKey="month" stroke="#555555" fontSize={10} />
+                        <YAxis stroke="#555555" fontSize={10} />
+                        <Tooltip contentStyle={{ backgroundColor: "#FFFFFF", borderColor: "rgba(74, 44, 29, 0.12)", color: "#1F1F1F" }} />
+                        <Bar dataKey="leads" fill="#B55A30" name="Design Brief Leads" radius={[0, 0, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>

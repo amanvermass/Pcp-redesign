@@ -267,30 +267,28 @@ Project Profile summary:\n
   // print window trigger
   const handlePrint = () => {
     window.print();
-  };
-
-  return (
+  };  return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-7xl mx-auto text-left font-sans">
       
       {/* Inputs Column */}
       <div className="lg:col-span-7 space-y-6">
         
         {/* Unit Selector & Presets */}
-        <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
+        <div className="glass-panel p-6 rounded-none border border-border space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-xs font-mono tracking-widest text-primary uppercase font-bold">Standard Presets & Units</h3>
             
             {/* Unit Toggle */}
-            <div className="flex bg-white/5 p-1 rounded-lg border border-white/5 text-xs font-mono">
+            <div className="flex bg-sand p-1 rounded-none border border-border text-xs font-mono">
               <button
                 onClick={() => handleUnitToggle("Metric")}
-                className={cn("px-3 py-1 rounded transition-colors", unit === "Metric" ? "bg-primary text-black font-semibold" : "text-muted-foreground")}
+                className={cn("px-3 py-1 rounded-none transition-colors cursor-pointer", unit === "Metric" ? "bg-primary text-primary-foreground font-semibold" : "text-muted-foreground")}
               >
                 Metric (m/mm)
               </button>
               <button
                 onClick={() => handleUnitToggle("Imperial")}
-                className={cn("px-3 py-1 rounded transition-colors", unit === "Imperial" ? "bg-primary text-black font-semibold" : "text-muted-foreground")}
+                className={cn("px-3 py-1 rounded-none transition-colors cursor-pointer", unit === "Imperial" ? "bg-primary text-primary-foreground font-semibold" : "text-muted-foreground")}
               >
                 Imperial (ft/in)
               </button>
@@ -307,7 +305,7 @@ Project Profile summary:\n
                   <button
                     key={pKey}
                     onClick={() => applyBuildingPreset(pKey)}
-                    className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-primary/30 text-[10px] text-white font-medium transition-all"
+                    className="px-3 py-1.5 rounded-none bg-sand border border-border hover:border-primary/30 text-[10px] text-foreground font-medium transition-all cursor-pointer"
                   >
                     {label}
                   </button>
@@ -320,9 +318,9 @@ Project Profile summary:\n
         {/* Inputs Layout Forms */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
-          {/* Wall Info Box */}
-          <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4 text-xs">
-            <h4 className="text-xs font-mono tracking-widest text-primary uppercase font-bold border-b border-white/5 pb-2">1. Wall Geometry</h4>
+          {/* Wall Geometry Box */}
+          <div className="glass-panel p-6 rounded-none border border-border space-y-4 text-xs">
+            <h4 className="text-xs font-mono tracking-widest text-primary uppercase font-bold border-b border-border pb-2">1. Wall Geometry</h4>
             
             <div className="space-y-3.5">
               <div className="space-y-1">
@@ -333,7 +331,7 @@ Project Profile summary:\n
                   step="0.1"
                   value={wallLength}
                   onChange={(e) => setWallLength(parseFloat(e.target.value) || 0)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-xs text-white"
+                  className="w-full bg-card border border-border rounded-none p-2.5 text-xs text-foreground focus:outline-none focus:border-primary"
                 />
               </div>
 
@@ -345,7 +343,7 @@ Project Profile summary:\n
                   step="0.1"
                   value={wallHeight}
                   onChange={(e) => setWallHeight(parseFloat(e.target.value) || 0)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-xs text-white"
+                  className="w-full bg-card border border-border rounded-none p-2.5 text-xs text-foreground focus:outline-none focus:border-primary"
                 />
               </div>
 
@@ -358,7 +356,7 @@ Project Profile summary:\n
                     step="1"
                     value={wallThickness}
                     onChange={(e) => setWallThickness(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2.5 text-xs text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div className="space-y-1">
@@ -368,7 +366,7 @@ Project Profile summary:\n
                     min="1"
                     value={numWalls}
                     onChange={(e) => setNumWalls(parseInt(e.target.value) || 1)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2.5 text-xs text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -376,8 +374,8 @@ Project Profile summary:\n
           </div>
 
           {/* Openings Box */}
-          <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4 text-xs">
-            <h4 className="text-xs font-mono tracking-widest text-primary uppercase font-bold border-b border-white/5 pb-2">2. Openings Cutouts</h4>
+          <div className="glass-panel p-6 rounded-none border border-border space-y-4 text-xs">
+            <h4 className="text-xs font-mono tracking-widest text-primary uppercase font-bold border-b border-border pb-2">2. Openings Cutouts</h4>
             
             <div className="space-y-3">
               <div className="grid grid-cols-3 gap-2 items-end">
@@ -388,7 +386,7 @@ Project Profile summary:\n
                     min="0"
                     value={numDoors}
                     onChange={(e) => setNumDoors(parseInt(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2 text-xs text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div className="space-y-1">
@@ -399,7 +397,7 @@ Project Profile summary:\n
                     step="0.1"
                     value={doorWidth}
                     onChange={(e) => setDoorWidth(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2 text-xs text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div className="space-y-1">
@@ -410,12 +408,12 @@ Project Profile summary:\n
                     step="0.1"
                     value={doorHeight}
                     onChange={(e) => setDoorHeight(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2 text-xs text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-2 items-end pt-2 border-t border-white/5">
+              <div className="grid grid-cols-3 gap-2 items-end pt-2 border-t border-border">
                 <div className="space-y-1">
                   <label className="text-muted-foreground font-mono text-[9px] uppercase">Windows</label>
                   <input
@@ -423,7 +421,7 @@ Project Profile summary:\n
                     min="0"
                     value={numWindows}
                     onChange={(e) => setNumWindows(parseInt(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2 text-xs text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div className="space-y-1">
@@ -434,7 +432,7 @@ Project Profile summary:\n
                     step="0.1"
                     value={windowWidth}
                     onChange={(e) => setWindowWidth(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2 text-xs text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div className="space-y-1">
@@ -445,7 +443,7 @@ Project Profile summary:\n
                     step="0.1"
                     value={windowHeight}
                     onChange={(e) => setWindowHeight(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2 text-xs text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -453,8 +451,8 @@ Project Profile summary:\n
           </div>
 
           {/* Brick Specifications Box */}
-          <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4 text-xs md:col-span-2">
-            <h4 className="text-xs font-mono tracking-widest text-primary uppercase font-bold border-b border-white/5 pb-2">3. Material Specifications</h4>
+          <div className="glass-panel p-6 rounded-none border border-border space-y-4 text-xs md:col-span-2">
+            <h4 className="text-xs font-mono tracking-widest text-primary uppercase font-bold border-b border-border pb-2">3. Material Specifications</h4>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
@@ -464,7 +462,7 @@ Project Profile summary:\n
                   <select
                     value={selectedBrickId}
                     onChange={(e) => setSelectedBrickId(e.target.value)}
-                    className="w-full bg-[#10121A] border border-white/10 rounded-lg p-2.5 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2.5 text-xs text-foreground focus:outline-none focus:border-primary"
                   >
                     {BRICK_PRESETS.map((p) => (
                       <option key={p.id} value={p.id}>{p.name}</option>
@@ -480,7 +478,7 @@ Project Profile summary:\n
                     step="0.5"
                     value={mortarThickness}
                     onChange={(e) => setMortarThickness(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-xs text-white"
+                    className="w-full bg-card border border-border rounded-none p-2.5 text-xs text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -498,7 +496,7 @@ Project Profile summary:\n
                       disabled={selectedBrickId !== "custom"}
                       value={brickLength}
                       onChange={(e) => setBrickLength(parseFloat(e.target.value) || 0)}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-xs text-white disabled:opacity-50"
+                      className="w-full bg-card border border-border rounded-none p-2.5 text-xs text-foreground disabled:opacity-50 focus:outline-none focus:border-primary"
                     />
                   </div>
                   <div className="space-y-1">
@@ -510,7 +508,7 @@ Project Profile summary:\n
                       disabled={selectedBrickId !== "custom"}
                       value={brickWidth}
                       onChange={(e) => setBrickWidth(parseFloat(e.target.value) || 0)}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-xs text-white disabled:opacity-50"
+                      className="w-full bg-card border border-border rounded-none p-2.5 text-xs text-foreground disabled:opacity-50 focus:outline-none focus:border-primary"
                     />
                   </div>
                   <div className="space-y-1">
@@ -522,7 +520,7 @@ Project Profile summary:\n
                       disabled={selectedBrickId !== "custom"}
                       value={brickHeight}
                       onChange={(e) => setBrickHeight(parseFloat(e.target.value) || 0)}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-xs text-white disabled:opacity-50"
+                      className="w-full bg-card border border-border rounded-none p-2.5 text-xs text-foreground disabled:opacity-50 focus:outline-none focus:border-primary"
                     />
                   </div>
                 </div>
@@ -532,8 +530,8 @@ Project Profile summary:\n
           </div>
 
           {/* Cost and wastage */}
-          <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4 text-xs md:col-span-2">
-            <h4 className="text-xs font-mono tracking-widest text-primary uppercase font-bold border-b border-white/5 pb-2">4. Commercials & margins</h4>
+          <div className="glass-panel p-6 rounded-none border border-border space-y-4 text-xs md:col-span-2">
+            <h4 className="text-xs font-mono tracking-widest text-primary uppercase font-bold border-b border-border pb-2">4. Commercials & margins</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
               <div className="space-y-2">
@@ -546,7 +544,7 @@ Project Profile summary:\n
                   max="20"
                   value={wastagePercent}
                   onChange={(e) => setWastagePercent(parseInt(e.target.value))}
-                  className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                  className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                 />
               </div>
 
@@ -558,7 +556,7 @@ Project Profile summary:\n
                   step="0.01"
                   value={costPerBrick}
                   onChange={(e) => setCostPerBrick(parseFloat(e.target.value) || 0)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-white"
+                  className="w-full bg-card border border-border rounded-none p-2 text-xs text-foreground focus:outline-none focus:border-primary"
                 />
               </div>
 
@@ -570,7 +568,7 @@ Project Profile summary:\n
                   step="50"
                   value={laborCost}
                   onChange={(e) => setLaborCost(parseFloat(e.target.value) || 0)}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-white"
+                  className="w-full bg-card border border-border rounded-none p-2 text-xs text-foreground focus:outline-none focus:border-primary"
                 />
               </div>
 
@@ -585,12 +583,12 @@ Project Profile summary:\n
       <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
         
         {/* Results Card */}
-        <div className="p-6 rounded-2xl bg-[#10121A] border border-primary/20 space-y-6 text-left">
+        <div className="p-6 rounded-none bg-secondary/50 border border-primary/20 space-y-6 text-left shadow-sm">
           
-          <div className="pb-4 border-b border-white/5 flex items-center justify-between">
+          <div className="pb-4 border-b border-border flex items-center justify-between">
             <span className="text-xs font-mono uppercase text-primary tracking-widest font-bold">Bill of Quantities (BOQ)</span>
             {errors.length > 0 && (
-              <span className="text-[10px] text-red-400 font-mono flex items-center gap-1">
+              <span className="text-[10px] text-red-500 font-mono flex items-center gap-1">
                 <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
                 Validations active
               </span>
@@ -598,7 +596,7 @@ Project Profile summary:\n
           </div>
 
           {errors.length > 0 ? (
-            <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-xs text-red-300 space-y-2">
+            <div className="p-4 rounded-none bg-red-500/10 border border-red-500/20 text-xs text-red-700 space-y-2">
               <span className="font-semibold font-mono uppercase">Errors Detected:</span>
               <ul className="list-disc pl-4 space-y-1">
                 {errors.map((err, i) => (
@@ -610,39 +608,39 @@ Project Profile summary:\n
             <div className="space-y-4">
               
               {/* Detailed Metrics */}
-              <div className="grid grid-cols-2 gap-4 text-xs font-mono border-b border-white/5 pb-4">
+              <div className="grid grid-cols-2 gap-4 text-xs font-mono border-b border-border pb-4">
                 <div>
                   <span className="text-muted-foreground uppercase text-[10px]">Total Wall Area</span>
-                  <p className="text-base font-bold text-white mt-1">{results.totalWallArea.toFixed(2)} <span className="text-[10px] text-muted-foreground">{results.areaUnit}</span></p>
+                  <p className="text-base font-bold text-foreground mt-1">{results.totalWallArea.toFixed(2)} <span className="text-[10px] text-muted-foreground">{results.areaUnit}</span></p>
                 </div>
                 <div>
                   <span className="text-muted-foreground uppercase text-[10px]">Openings Deduction</span>
-                  <p className="text-base font-bold text-white mt-1">{results.openingArea.toFixed(2)} <span className="text-[10px] text-muted-foreground">{results.areaUnit}</span></p>
+                  <p className="text-base font-bold text-foreground mt-1">{results.openingArea.toFixed(2)} <span className="text-[10px] text-muted-foreground">{results.areaUnit}</span></p>
                 </div>
                 <div>
                   <span className="text-muted-foreground uppercase text-[10px]">Net Wall Area</span>
-                  <p className="text-base font-bold text-white mt-1">{results.netWallArea.toFixed(2)} <span className="text-[10px] text-muted-foreground">{results.areaUnit}</span></p>
+                  <p className="text-base font-bold text-foreground mt-1">{results.netWallArea.toFixed(2)} <span className="text-[10px] text-muted-foreground">{results.areaUnit}</span></p>
                 </div>
                 <div>
                   <span className="text-muted-foreground uppercase text-[10px]">Total Wall Volume</span>
-                  <p className="text-base font-bold text-white mt-1">{results.wallVolume.toFixed(2)} <span className="text-[10px] text-muted-foreground">{results.volumeUnit}</span></p>
+                  <p className="text-base font-bold text-foreground mt-1">{results.wallVolume.toFixed(2)} <span className="text-[10px] text-muted-foreground">{results.volumeUnit}</span></p>
                 </div>
               </div>
 
               {/* Quantities output */}
-              <div className="grid grid-cols-2 gap-4 text-xs font-mono border-b border-white/5 pb-4">
+              <div className="grid grid-cols-2 gap-4 text-xs font-mono border-b border-border pb-4">
                 <div>
                   <span className="text-muted-foreground uppercase text-[10px]">Base Bricks Required</span>
-                  <p className="text-xl font-bold text-white mt-1">{results.requiredBricks.toLocaleString()} <span className="text-xs text-muted-foreground">pcs</span></p>
+                  <p className="text-xl font-bold text-foreground mt-1">{results.requiredBricks.toLocaleString()} <span className="text-xs text-muted-foreground">pcs</span></p>
                 </div>
                 <div>
                   <span className="text-muted-foreground uppercase text-[10px]">Wastage ({wastagePercent}%)</span>
-                  <p className="text-xl font-bold text-white mt-1">{results.wastageCount.toLocaleString()} <span className="text-xs text-muted-foreground">pcs</span></p>
+                  <p className="text-xl font-bold text-foreground mt-1">{results.wastageCount.toLocaleString()} <span className="text-xs text-muted-foreground">pcs</span></p>
                 </div>
               </div>
 
               {/* Final target */}
-              <div className="p-4 bg-white/5 rounded-xl border border-white/5 flex items-center justify-between">
+              <div className="p-4 bg-card rounded-none border border-border flex items-center justify-between shadow-sm">
                 <div>
                   <span className="text-[10px] text-muted-foreground uppercase font-mono">Final Brick Quantity</span>
                   <h3 className="text-3xl font-display font-semibold text-primary mt-1">{results.finalQuantity.toLocaleString()} <span className="text-sm text-primary font-sans font-normal">pcs</span></h3>
@@ -650,7 +648,7 @@ Project Profile summary:\n
                 
                 <div className="text-right">
                   <span className="text-[10px] text-muted-foreground uppercase font-mono block">Estimated Cost</span>
-                  <h3 className="text-3xl font-display font-semibold text-white mt-1">${results.totalCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
+                  <h3 className="text-3xl font-display font-semibold text-foreground mt-1">${results.totalCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
                 </div>
               </div>
 
@@ -662,7 +660,7 @@ Project Profile summary:\n
             <button
               onClick={handlePrint}
               disabled={errors.length > 0}
-              className="flex-1 py-2.5 rounded-lg border border-white/10 hover:border-primary bg-white/5 text-white hover:text-black hover:bg-primary text-xs font-semibold flex items-center justify-center gap-1.5 transition-all disabled:opacity-50"
+              className="flex-1 py-2.5 rounded-none border border-border hover:border-primary bg-card text-foreground hover:text-primary-foreground hover:bg-primary text-xs font-semibold flex items-center justify-center gap-1.5 transition-all disabled:opacity-50 cursor-pointer"
             >
               <Printer className="w-4 h-4" />
               Print Estimate
@@ -670,7 +668,7 @@ Project Profile summary:\n
             <button
               onClick={handleShare}
               disabled={errors.length > 0}
-              className="flex-1 py-2.5 rounded-lg border border-white/10 hover:border-primary bg-white/5 text-white hover:text-black hover:bg-primary text-xs font-semibold flex items-center justify-center gap-1.5 transition-all disabled:opacity-50"
+              className="flex-1 py-2.5 rounded-none border border-border hover:border-primary bg-card text-foreground hover:text-primary-foreground hover:bg-primary text-xs font-semibold flex items-center justify-center gap-1.5 transition-all disabled:opacity-50 cursor-pointer"
             >
               <Share2 className="w-4 h-4" />
               {copied ? "Copied" : "Share BOQ"}
@@ -681,17 +679,17 @@ Project Profile summary:\n
 
         {/* Visualizer Schematic */}
         {errors.length === 0 && (
-          <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
+          <div className="glass-panel p-6 rounded-none border border-border space-y-4">
             <h4 className="text-xs font-mono tracking-widest text-muted-foreground uppercase font-bold">Elevation Layout Visualizer</h4>
             
             {/* SVG Diagram representing walls & openings cutouts */}
-            <div className="relative w-full aspect-[2/1] bg-card rounded-xl border border-white/5 overflow-hidden flex items-center justify-center p-4">
+            <div className="relative w-full aspect-[2/1] bg-sand/30 rounded-none border border-border overflow-hidden flex items-center justify-center p-4">
               
               {/* Brick grid pattern representation */}
-              <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-[size:10px_6px] pointer-events-none" />
+              <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#1c1c1c_1px,transparent_1px)] bg-[size:10px_6px] pointer-events-none" />
 
               {/* Main wall container block */}
-              <div className="relative w-4/5 h-4/5 border border-primary/30 rounded bg-primary/5 flex items-center justify-center">
+              <div className="relative w-4/5 h-4/5 border border-primary/30 rounded-none bg-primary/10 flex items-center justify-center">
                 <span className="absolute bottom-2 right-2 text-[8px] font-mono text-primary/70">{wallLength}x{wallHeight} Wall</span>
 
                 {/* Simulated openings */}
@@ -700,7 +698,7 @@ Project Profile summary:\n
                   {numDoors > 0 && (
                     <div className="flex gap-2">
                       {Array.from({ length: Math.min(numDoors, 3) }).map((_, i) => (
-                        <div key={i} className="w-8 h-12 bg-card border border-white/20 rounded-t flex items-center justify-center">
+                        <div key={i} className="w-8 h-12 bg-card border border-border rounded-none flex items-center justify-center">
                           <span className="text-[7px] text-muted-foreground font-mono">D</span>
                         </div>
                       ))}
@@ -711,7 +709,7 @@ Project Profile summary:\n
                   {numWindows > 0 && (
                     <div className="flex gap-2">
                       {Array.from({ length: Math.min(numWindows, 4) }).map((_, i) => (
-                        <div key={i} className="w-10 h-8 bg-card border border-white/20 rounded flex items-center justify-center mt-2">
+                        <div key={i} className="w-10 h-8 bg-card border border-border rounded-none flex items-center justify-center mt-2">
                           <span className="text-[7px] text-muted-foreground font-mono">W</span>
                         </div>
                       ))}
@@ -722,7 +720,7 @@ Project Profile summary:\n
             </div>
 
             {/* Brick layout details */}
-            <div className="flex justify-between items-center text-[9px] text-muted-foreground font-mono border-t border-white/5 pt-3">
+            <div className="flex justify-between items-center text-[9px] text-muted-foreground font-mono border-t border-border pt-3">
               <span>Brick Layout: Running Bond</span>
               <span>Joint Mortar gap: {mortarThickness}{unit === "Metric" ? "mm" : "in"}</span>
             </div>

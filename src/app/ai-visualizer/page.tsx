@@ -104,7 +104,7 @@ export default function AiFacadeVisualizer() {
             <Cpu className="w-3.5 h-3.5" />
             AI Visualizer Sandbox
           </div>
-          <h1 className="heading-premium text-4xl md:text-5xl text-white font-semibold">AI Façade Visualizer</h1>
+          <h1 className="heading-premium text-4xl md:text-5xl text-foreground font-semibold">AI Façade Visualizer</h1>
           <p className="text-sm text-muted-foreground max-w-xl">
             Simulate premium clay facades or longformat facing bricks in architectural settings. Select models or drag/scrub sliders.
           </p>
@@ -116,7 +116,7 @@ export default function AiFacadeVisualizer() {
           {/* Main Visualizer (Scrub Slider) Column */}
           <div className="lg:col-span-8 flex flex-col justify-between space-y-4">
             
-            <div className="relative aspect-[16/10] w-full bg-[#10121A] rounded-2xl overflow-hidden border border-white/10 shadow-2xl flex items-center justify-center">
+            <div className="relative aspect-[16/10] w-full bg-sand/30 rounded-none border border-border shadow-md flex items-center justify-center">
               {isUploading ? (
                 <div className="space-y-4 text-center">
                   <RefreshCw className="w-8 h-8 text-primary animate-spin mx-auto" />
@@ -133,22 +133,22 @@ export default function AiFacadeVisualizer() {
               )}
             </div>
 
-            <div className="flex justify-between items-center text-[10px] text-muted-foreground font-mono uppercase bg-white/5 border border-white/10 p-3 rounded-lg">
+            <div className="flex justify-between items-center text-[10px] text-muted-foreground font-mono uppercase bg-sand border border-border p-3 rounded-none">
               <span>Interactive Slider Mode</span>
-              <span>Hold and Drag the gold center bar to compare envelope finishes</span>
+              <span>Hold and Drag the center bar to compare envelope finishes</span>
             </div>
           </div>
 
           {/* Configuration Panel Column */}
-          <div className="lg:col-span-4 p-6 glass-panel rounded-2xl border border-white/10 text-left space-y-6 flex flex-col justify-between">
+          <div className="lg:col-span-4 p-6 glass-panel rounded-none border border-border text-left space-y-6 flex flex-col justify-between shadow-sm">
             
             <div className="space-y-6">
               {/* Image Upload Simulator */}
               <div className="space-y-2">
                 <span className="text-[10px] font-mono text-primary uppercase tracking-widest block">Upload elevations</span>
-                <label className="border border-dashed border-white/10 rounded-xl p-6 flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-primary/20 hover:bg-white/[0.02] transition-all duration-300">
+                <label className="border border-dashed border-border rounded-none p-6 flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-primary/20 hover:bg-sand/20 transition-all duration-300">
                   <Upload className="w-5 h-5 text-muted-foreground" />
-                  <span className="text-xs text-white font-medium">Select Elevations JPEG / PNG</span>
+                  <span className="text-xs text-foreground font-medium">Select Elevations JPEG / PNG</span>
                   <span className="text-[9px] text-muted-foreground">Supported up to 15MB</span>
                   <input
                     type="file"
@@ -167,10 +167,10 @@ export default function AiFacadeVisualizer() {
                     <button
                       key={temp.id}
                       onClick={() => handleTemplateChange(temp.id)}
-                      className={`flex-1 py-2 px-3 rounded-lg border text-xs font-semibold text-center transition-all ${
+                      className={`flex-1 py-2 px-3 rounded-none border text-xs font-semibold text-center transition-all cursor-pointer ${
                         selectedTemplate.id === temp.id && !customImageUploaded
-                          ? "bg-primary text-black border-primary"
-                          : "bg-white/5 border-white/5 text-muted-foreground hover:text-white"
+                          ? "bg-primary text-primary-foreground border-primary"
+                          : "bg-sand border-border text-muted-foreground hover:text-primary"
                       }`}
                     >
                       {temp.name}
@@ -187,15 +187,15 @@ export default function AiFacadeVisualizer() {
                     <button
                       key={mat.id}
                       onClick={() => setSelectedMaterial(mat)}
-                      className={`w-full flex items-center justify-between p-3 rounded-xl border transition-all text-left ${
+                      className={`w-full flex items-center justify-between p-3 rounded-none border transition-all text-left cursor-pointer ${
                         selectedMaterial.id === mat.id
-                          ? "bg-primary/10 border-primary/30 text-primary"
-                          : "bg-white/5 border-white/5 text-secondary-foreground hover:border-white/20"
+                          ? "bg-primary/5 border-primary/30 text-primary"
+                          : "bg-sand border-border text-secondary-foreground hover:border-primary/20"
                       }`}
                     >
                       <div className="space-y-0.5">
                         <span className="text-[9px] font-mono uppercase opacity-75">{mat.category}</span>
-                        <h4 className="text-xs font-semibold text-white">{mat.name}</h4>
+                        <h4 className={`text-xs font-semibold ${selectedMaterial.id === mat.id ? "text-primary" : "text-foreground"}`}>{mat.name}</h4>
                       </div>
                       {selectedMaterial.id === mat.id && (
                         <Check className="w-4 h-4 text-primary shrink-0" />
@@ -206,7 +206,7 @@ export default function AiFacadeVisualizer() {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-white/5 text-[10px] text-muted-foreground leading-relaxed">
+            <div className="pt-4 border-t border-border text-[10px] text-muted-foreground leading-relaxed">
               *The AI Facade Visualizer renders clay tiles and panels onto structural bounds using dummy graphics processing.
             </div>
 

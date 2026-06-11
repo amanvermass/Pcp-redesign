@@ -53,14 +53,14 @@ export default function DealerLocatorPage() {
             <MapPin className="w-3.5 h-3.5" />
             Global Show galleries
           </div>
-          <h1 className="heading-premium text-4xl md:text-5xl text-white font-semibold">Dealer Locator</h1>
+          <h1 className="heading-premium text-4xl md:text-5xl text-foreground font-semibold">Dealer Locator</h1>
           <p className="text-sm text-muted-foreground max-w-xl">
             Locate authorized show studios, technical consultation support, and architectural catalog distribution hubs worldwide.
           </p>
         </div>
 
         {/* Global Toolbar */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center justify-between p-4 glass-panel rounded-xl border border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center justify-between p-4 glass-panel rounded-none border border-border shadow-sm">
           {/* Search query */}
           <div className="relative col-span-1 md:col-span-2">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -69,36 +69,36 @@ export default function DealerLocatorPage() {
               placeholder="Search by city, showroom name..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder-muted-foreground focus:border-primary outline-none transition-all"
+              className="w-full bg-card border border-border rounded-none pl-9 pr-4 py-2 text-sm text-foreground placeholder-muted-foreground focus:border-primary outline-none transition-all"
             />
           </div>
 
           {/* Region */}
-          <div className="bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-xs text-left">
+          <div className="bg-card border border-border px-3 py-2 rounded-none text-xs text-left">
             <select
               value={selectedRegion}
               onChange={(e) => setSelectedRegion(e.target.value)}
-              className="bg-transparent text-white border-none outline-none cursor-pointer w-full"
+              className="bg-transparent text-foreground border-none outline-none cursor-pointer w-full"
             >
-              <option value="all" className="bg-[#08090C]">All Regions</option>
-              <option value="Europe" className="bg-[#08090C]">Europe</option>
-              <option value="Asia Pacific" className="bg-[#08090C]">Asia Pacific</option>
-              <option value="North America" className="bg-[#08090C]">North America</option>
-              <option value="Middle East" className="bg-[#08090C]">Middle East</option>
+              <option value="all" className="bg-card text-foreground">All Regions</option>
+              <option value="Europe" className="bg-card text-foreground">Europe</option>
+              <option value="Asia Pacific" className="bg-card text-foreground">Asia Pacific</option>
+              <option value="North America" className="bg-card text-foreground">North America</option>
+              <option value="Middle East" className="bg-card text-foreground">Middle East</option>
             </select>
           </div>
 
           {/* Showroom type */}
-          <div className="bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-xs text-left">
+          <div className="bg-card border border-border px-3 py-2 rounded-none text-xs text-left">
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="bg-transparent text-white border-none outline-none cursor-pointer w-full"
+              className="bg-transparent text-foreground border-none outline-none cursor-pointer w-full"
             >
-              <option value="all" className="bg-[#08090C]">All Showroom Types</option>
-              <option value="Flagship Studio" className="bg-[#08090C]">Flagship Studio</option>
-              <option value="Authorized Gallery" className="bg-[#08090C]">Authorized Gallery</option>
-              <option value="Technical Partner" className="bg-[#08090C]">Technical Partner</option>
+              <option value="all" className="bg-card text-foreground">All Showroom Types</option>
+              <option value="Flagship Studio" className="bg-card text-foreground">Flagship Studio</option>
+              <option value="Authorized Gallery" className="bg-card text-foreground">Authorized Gallery</option>
+              <option value="Technical Partner" className="bg-card text-foreground">Technical Partner</option>
             </select>
           </div>
         </div>
@@ -112,10 +112,10 @@ export default function DealerLocatorPage() {
               <button
                 key={d.id}
                 onClick={() => handleDealerFocus(d)}
-                className={`w-full p-4 rounded-xl border text-left transition-all duration-300 block ${
+                className={`w-full p-4 rounded-none border text-left transition-all duration-300 block cursor-pointer ${
                   focusedDealer?.id === d.id
-                    ? "bg-primary/10 border-primary text-primary"
-                    : "bg-card border-white/10 text-secondary-foreground hover:border-white/20"
+                    ? "bg-primary/5 border-primary text-primary"
+                    : "bg-card border-border text-secondary-foreground hover:border-primary/30"
                 }`}
               >
                 <div className="space-y-2">
@@ -123,7 +123,7 @@ export default function DealerLocatorPage() {
                     <span className="text-[9px] font-mono uppercase tracking-widest text-primary font-bold">{d.type}</span>
                     <span className="text-[10px] text-muted-foreground font-mono">{d.city}</span>
                   </div>
-                  <h4 className="text-sm font-semibold text-white">{d.name}</h4>
+                  <h4 className={`text-sm font-semibold transition-colors ${focusedDealer?.id === d.id ? "text-primary" : "text-foreground"}`}>{d.name}</h4>
                   <p className="text-xs text-muted-foreground leading-normal line-clamp-2">{d.address}</p>
                 </div>
               </button>
@@ -137,13 +137,13 @@ export default function DealerLocatorPage() {
           </div>
 
           {/* Interactive Custom SVG Map Column */}
-          <div className="lg:col-span-8 p-6 glass-panel rounded-2xl border border-white/10 flex flex-col justify-between space-y-6 relative min-h-[40vh]">
+          <div className="lg:col-span-8 p-6 glass-panel rounded-none border border-border flex flex-col justify-between space-y-6 relative min-h-[40vh] shadow-sm">
             
             {/* World Map SVG stylized mockup */}
-            <div className="relative w-full flex-1 border border-white/5 rounded-xl bg-white/[0.01] overflow-hidden flex items-center justify-center p-4">
+            <div className="relative w-full flex-1 border border-border rounded-none bg-sand/30 overflow-hidden flex items-center justify-center p-4">
               
               {/* Dot Grid representing continents */}
-              <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1.5px,transparent_1.5px)] bg-[size:16px_16px] pointer-events-none" />
+              <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#1c1c1c_1.5px,transparent_1.5px)] bg-[size:16px_16px] pointer-events-none" />
 
               {/* Showroom Pins on the simulated map space */}
               <div className="relative w-full aspect-[2/1] max-w-xl">
@@ -156,17 +156,17 @@ export default function DealerLocatorPage() {
                     <button
                       key={dealer.id}
                       onClick={() => handleDealerFocus(dealer)}
-                      className="absolute group transition-transform duration-300 hover:scale-110 z-10"
+                      className="absolute group transition-transform duration-300 hover:scale-110 z-10 cursor-pointer"
                       style={{ left: `${dealer.coordinates.x}%`, top: `${dealer.coordinates.y}%` }}
                     >
                       <MapPin
                         className={`w-5 h-5 transition-colors ${
-                          isFocused ? "text-primary filter drop-shadow-[0_0_8px_rgba(212,175,55,0.8)]" : "text-muted-foreground group-hover:text-white"
+                          isFocused ? "text-primary filter drop-shadow-[0_0_4px_rgba(181,90,48,0.5)]" : "text-muted-foreground group-hover:text-primary"
                         }`}
                       />
                       
                       {/* Tooltip */}
-                      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-[#08090C] border border-white/10 text-[9px] text-white px-2 py-1 rounded shadow-lg whitespace-nowrap z-20 font-mono">
+                      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-card border border-border text-[9px] text-foreground px-2 py-1 rounded-none shadow-md whitespace-nowrap z-20 font-mono">
                         {dealer.city}
                       </span>
                     </button>
@@ -177,10 +177,10 @@ export default function DealerLocatorPage() {
 
             {/* Focused Dealer Details Display */}
             {focusedDealer && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 bg-white/5 border border-white/10 rounded-xl text-left text-xs items-center">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 bg-sand border border-border rounded-none text-left text-xs items-center shadow-sm">
                 <div className="space-y-1">
                   <span className="text-[10px] text-primary font-mono uppercase tracking-widest block font-bold">Contact Studio</span>
-                  <h4 className="text-sm font-semibold text-white leading-tight">{focusedDealer.name}</h4>
+                  <h4 className="text-sm font-semibold text-foreground leading-tight">{focusedDealer.name}</h4>
                   <p className="text-muted-foreground mt-1">{focusedDealer.address}</p>
                 </div>
                 
@@ -196,7 +196,7 @@ export default function DealerLocatorPage() {
                 </div>
 
                 <div className="flex justify-end">
-                  <button className="w-full md:w-auto px-4 py-2 bg-primary hover:bg-gold-light text-black font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors">
+                  <button className="w-full md:w-auto px-4 py-2 bg-primary hover:bg-brick text-primary-foreground font-semibold rounded-none flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
                     <Navigation className="w-4 h-4" />
                     Get Directions
                   </button>

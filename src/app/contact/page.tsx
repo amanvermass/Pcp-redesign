@@ -68,7 +68,7 @@ export default function ContactPage() {
             <Mail className="w-3.5 h-3.5" />
             Connect With Specifiers
           </div>
-          <h1 className="heading-premium text-4xl md:text-5xl text-white font-semibold">Contact Our Studios</h1>
+          <h1 className="heading-premium text-4xl md:text-5xl text-foreground font-semibold">Contact Our Studios</h1>
           <p className="text-sm text-muted-foreground max-w-xl">
             Submit drawing files, request layout estimation schedules, or schedule physical showroom consultation appointments.
           </p>
@@ -78,10 +78,10 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-6xl mx-auto">
           
           {/* Interactive Multi-step Form Column */}
-          <div className="lg:col-span-7 p-8 glass-panel rounded-2xl border border-white/10 text-left space-y-6 min-h-[380px] flex flex-col justify-between relative overflow-hidden">
+          <div className="lg:col-span-7 p-8 glass-panel rounded-none border border-border text-left space-y-6 min-h-[380px] flex flex-col justify-between relative overflow-hidden shadow-sm">
             
             {/* Header info inside panel */}
-            <div className="flex justify-between items-center pb-4 border-b border-white/5 text-[10px] font-mono text-muted-foreground uppercase">
+            <div className="flex justify-between items-center pb-4 border-b border-border text-[10px] font-mono text-muted-foreground uppercase">
               <span>Spec Inquiry wizard</span>
               <span>Step {step} of 4</span>
             </div>
@@ -98,7 +98,7 @@ export default function ContactPage() {
                     exit={{ opacity: 0, x: -20 }}
                     className="space-y-4"
                   >
-                    <h3 className="heading-premium text-lg text-white">Select inquiry focus</h3>
+                    <h3 className="heading-premium text-lg text-foreground">Select inquiry focus</h3>
                     <div className="grid grid-cols-1 gap-2 pt-2">
                       {[
                         { id: "quote", label: "Commercial Project Material Quotation", desc: "Request formal estimates based on blueprints", Icon: FileText },
@@ -114,17 +114,17 @@ export default function ContactPage() {
                               setInquiryType(item.id);
                               setStep(2);
                             }}
-                            className={`p-4 rounded-xl border text-left flex gap-3 transition-all ${
+                            className={`p-4 rounded-none border text-left flex gap-3 transition-all cursor-pointer ${
                               inquiryType === item.id
-                                ? "bg-primary/15 border-primary text-primary"
-                                : "bg-white/5 border-white/5 text-secondary-foreground hover:border-white/25"
+                                ? "bg-primary/5 border-primary text-primary"
+                                : "bg-sand border-border text-secondary-foreground hover:border-primary/20 hover:text-primary animate-none"
                             }`}
                           >
-                            <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center shrink-0 text-muted-foreground group-hover:text-primary">
+                            <div className="w-8 h-8 rounded-none bg-sand flex items-center justify-center shrink-0 text-muted-foreground group-hover:text-primary">
                               <IconComp className="w-4 h-4" />
                             </div>
                             <div>
-                              <h4 className="text-xs font-semibold text-white">{item.label}</h4>
+                              <h4 className={`text-xs font-semibold ${inquiryType === item.id ? "text-primary" : "text-foreground"}`}>{item.label}</h4>
                               <p className="text-[10px] text-muted-foreground mt-0.5">{item.desc}</p>
                             </div>
                           </button>
@@ -143,7 +143,7 @@ export default function ContactPage() {
                     exit={{ opacity: 0, x: -20 }}
                     className="space-y-4"
                   >
-                    <h3 className="heading-premium text-lg text-white">Share your contact details</h3>
+                    <h3 className="heading-premium text-lg text-foreground">Share your contact details</h3>
                     
                     <div className="space-y-3 pt-2 text-xs">
                       <div className="space-y-1">
@@ -154,7 +154,7 @@ export default function ContactPage() {
                           placeholder="e.g. Richard Rogers"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white outline-none focus:border-primary transition-all"
+                          className="w-full bg-card border border-border rounded-none p-2.5 text-foreground outline-none focus:border-primary transition-all"
                         />
                       </div>
 
@@ -166,7 +166,7 @@ export default function ContactPage() {
                           placeholder="richard@rogerspartners.com"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white outline-none focus:border-primary transition-all"
+                          className="w-full bg-card border border-border rounded-none p-2.5 text-foreground outline-none focus:border-primary transition-all"
                         />
                       </div>
 
@@ -177,7 +177,7 @@ export default function ContactPage() {
                           placeholder="Rogers Stirk Harbour + Partners"
                           value={firmName}
                           onChange={(e) => setFirmName(e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white outline-none focus:border-primary transition-all"
+                          className="w-full bg-card border border-border rounded-none p-2.5 text-foreground outline-none focus:border-primary transition-all"
                         />
                       </div>
                     </div>
@@ -193,7 +193,7 @@ export default function ContactPage() {
                     exit={{ opacity: 0, x: -20 }}
                     className="space-y-4"
                   >
-                    <h3 className="heading-premium text-lg text-white">How can our technicians assist you?</h3>
+                    <h3 className="heading-premium text-lg text-foreground">How can our technicians assist you?</h3>
                     <form onSubmit={handleSubmit} className="space-y-4 pt-2 text-xs">
                       <div className="space-y-1">
                         <label className="text-[9px] font-mono text-muted-foreground uppercase">Project description / comments</label>
@@ -203,12 +203,12 @@ export default function ContactPage() {
                           placeholder="Provide details about structural loads, climate codes, envelope specifications..."
                           value={message}
                           onChange={(e) => setMessage(e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-lg p-2.5 text-white outline-none focus:border-primary transition-all resize-none"
+                          className="w-full bg-card border border-border rounded-none p-2.5 text-foreground outline-none focus:border-primary transition-all resize-none"
                         />
                       </div>
                       <button
                         type="submit"
-                        className="w-full py-2.5 rounded-lg bg-primary hover:bg-gold-light text-black font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                        className="w-full py-2.5 bg-primary hover:bg-brick text-primary-foreground font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer rounded-none"
                       >
                         <Send className="w-4 h-4" />
                         Send Briefing to Advisors
@@ -225,16 +225,16 @@ export default function ContactPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="text-center py-8 space-y-4"
                   >
-                    <div className="w-12 h-12 rounded-full bg-primary/20 text-primary flex items-center justify-center mx-auto">
+                    <div className="w-12 h-12 rounded-none bg-primary/10 text-primary flex items-center justify-center mx-auto">
                       <CheckCircle className="w-6 h-6 animate-pulse" />
                     </div>
-                    <h3 className="heading-premium text-xl text-white">Specification Briefing Logged</h3>
+                    <h3 className="heading-premium text-xl text-foreground">Specification Briefing Logged</h3>
                     <p className="text-xs text-muted-foreground leading-relaxed max-w-sm mx-auto">
                       A copy of your design details has been sent to our local showroom director. Expect technical logs within 24 hours.
                     </p>
                     <button
                       onClick={resetForm}
-                      className="px-4 py-2 bg-white/5 border border-white/10 hover:border-primary hover:text-black hover:bg-primary text-xs font-semibold rounded-lg transition-colors inline-block mt-4"
+                      className="px-4 py-2 bg-card border border-border hover:border-primary hover:text-primary-foreground hover:bg-primary text-xs font-semibold rounded-none transition-colors inline-block mt-4 cursor-pointer"
                     >
                       Log Another Request
                     </button>
@@ -246,11 +246,11 @@ export default function ContactPage() {
 
             {/* Step Controls */}
             {step < 4 && (
-              <div className="flex justify-between items-center pt-4 border-t border-white/5">
+              <div className="flex justify-between items-center pt-4 border-t border-border">
                 {step > 1 ? (
                   <button
                     onClick={() => setStep((s) => s - 1)}
-                    className="flex items-center gap-1 text-xs text-muted-foreground hover:text-white font-mono"
+                    className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary font-mono cursor-pointer"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     Previous Step
@@ -262,7 +262,7 @@ export default function ContactPage() {
                 {step < 3 ? (
                   <button
                     onClick={handleNext}
-                    className="flex items-center gap-1 text-xs text-primary hover:text-gold-light font-mono font-semibold"
+                    className="flex items-center gap-1 text-xs text-primary hover:text-brick font-mono font-semibold cursor-pointer"
                   >
                     Continue
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -277,15 +277,15 @@ export default function ContactPage() {
 
           {/* Location details column */}
           <div className="lg:col-span-5 space-y-6 text-left">
-            <h3 className="heading-premium text-2xl text-white">Showroom Design Centers</h3>
+            <h3 className="heading-premium text-2xl text-foreground">Showroom Design Centers</h3>
             
             <div className="space-y-4">
               {studios.map((st, idx) => (
                 <div
                   key={idx}
-                  className="p-5 rounded-xl border border-white/10 bg-card hover:border-primary/20 transition-all duration-300 space-y-3"
+                  className="p-5 rounded-none border border-border bg-card hover:border-primary/50 transition-all duration-300 space-y-3 shadow-sm"
                 >
-                  <h4 className="text-sm font-semibold text-white font-display flex items-center gap-2">
+                  <h4 className="text-sm font-semibold text-foreground font-display flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-primary shrink-0" />
                     {st.city}
                   </h4>

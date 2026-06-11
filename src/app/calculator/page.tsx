@@ -65,7 +65,7 @@ export default function CalculatorPage() {
             <Calculator className="w-3.5 h-3.5" />
             Interactive Tools
           </div>
-          <h1 className="heading-premium text-4xl md:text-5xl text-white font-semibold">Material Calculators</h1>
+          <h1 className="heading-premium text-4xl md:text-5xl text-foreground font-semibold">Material Calculators</h1>
           <p className="text-sm text-muted-foreground max-w-xl">
             Input layout dimensions to compute required facing bricks, terracotta rainscreen panels, or obtain preliminary budget estimations.
           </p>
@@ -83,11 +83,11 @@ export default function CalculatorPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch max-w-6xl mx-auto">
             
             {/* Inputs Column */}
-            <div className="lg:col-span-7 p-8 glass-panel rounded-2xl border border-white/10 flex flex-col justify-between text-left space-y-6">
+            <div className="lg:col-span-7 p-8 glass-panel rounded-none border border-border flex flex-col justify-between text-left space-y-6">
               
               {activeTab === "paver" && (
                 <div className="space-y-6">
-                  <h3 className="heading-premium text-xl text-white">Landscaping Area</h3>
+                  <h3 className="heading-premium text-xl text-foreground">Landscaping Area</h3>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs text-muted-foreground font-mono uppercase">
@@ -99,7 +99,7 @@ export default function CalculatorPage() {
                       max="150"
                       value={paverLength}
                       onChange={(e) => setPaverLength(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
 
@@ -113,7 +113,7 @@ export default function CalculatorPage() {
                       max="50"
                       value={paverWidth}
                       onChange={(e) => setPaverWidth(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
 
@@ -127,7 +127,7 @@ export default function CalculatorPage() {
                       max="20"
                       value={paverWastage}
                       onChange={(e) => setPaverWastage(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
                 </div>
@@ -135,7 +135,7 @@ export default function CalculatorPage() {
 
               {activeTab === "roof" && (
                 <div className="space-y-6">
-                  <h3 className="heading-premium text-xl text-white">Roofing Boundaries</h3>
+                  <h3 className="heading-premium text-xl text-foreground">Roofing Boundaries</h3>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs text-muted-foreground font-mono uppercase">
@@ -147,7 +147,7 @@ export default function CalculatorPage() {
                       max="50"
                       value={roofLength}
                       onChange={(e) => setRoofLength(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
 
@@ -161,7 +161,7 @@ export default function CalculatorPage() {
                       max="100"
                       value={roofWidth}
                       onChange={(e) => setRoofWidth(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
 
@@ -175,7 +175,7 @@ export default function CalculatorPage() {
                       max="60"
                       value={roofSlope}
                       onChange={(e) => setRoofSlope(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
                 </div>
@@ -183,7 +183,7 @@ export default function CalculatorPage() {
 
               {activeTab === "facade" && (
                 <div className="space-y-6">
-                  <h3 className="heading-premium text-xl text-white">Façade Grid Dimensions</h3>
+                  <h3 className="heading-premium text-xl text-foreground">Façade Grid Dimensions</h3>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs text-muted-foreground font-mono uppercase">
@@ -195,7 +195,7 @@ export default function CalculatorPage() {
                       max="200"
                       value={facadeWidth}
                       onChange={(e) => setFacadeWidth(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
 
@@ -209,7 +209,7 @@ export default function CalculatorPage() {
                       max="80"
                       value={facadeHeight}
                       onChange={(e) => setFacadeHeight(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
 
@@ -223,7 +223,7 @@ export default function CalculatorPage() {
                       max="40"
                       value={facadeCutouts}
                       onChange={(e) => setFacadeCutouts(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
                 </div>
@@ -231,7 +231,7 @@ export default function CalculatorPage() {
 
               {activeTab === "cost" && (
                 <div className="space-y-6">
-                  <h3 className="heading-premium text-xl text-white">Project Scope</h3>
+                  <h3 className="heading-premium text-xl text-foreground">Project Scope</h3>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs text-muted-foreground font-mono uppercase">
@@ -243,7 +243,7 @@ export default function CalculatorPage() {
                       max="1000"
                       value={estimatorArea}
                       onChange={(e) => setEstimatorArea(parseInt(e.target.value))}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                      className="w-full h-1 bg-sand rounded-none appearance-none cursor-pointer accent-primary"
                     />
                   </div>
 
@@ -259,10 +259,10 @@ export default function CalculatorPage() {
                           key={tier.id}
                           type="button"
                           onClick={() => setEstimatorTier(tier.id)}
-                          className={`py-2 px-3 rounded-lg border text-xs font-semibold text-center transition-all ${
+                          className={`py-2 px-3 rounded-none border text-xs font-semibold text-center transition-all cursor-pointer ${
                             estimatorTier === tier.id
-                              ? "bg-primary text-black border-primary"
-                              : "bg-white/5 border-white/5 text-muted-foreground"
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "bg-sand border-border text-muted-foreground hover:bg-sand/80"
                           }`}
                         >
                           {tier.label}
@@ -273,17 +273,14 @@ export default function CalculatorPage() {
                 </div>
               )}
 
-              <div className="pt-4 border-t border-white/5 text-[10px] text-muted-foreground font-mono">
+              <div className="pt-4 border-t border-border text-[10px] text-muted-foreground font-mono">
                 Calculation utilizes default standard coverages. Tolerances must be verified by engineers.
               </div>
             </div>
 
             {/* Results Column */}
-            <div className="lg:col-span-5 p-8 rounded-2xl bg-white/[0.02] border border-primary/20 flex flex-col justify-between text-left space-y-8 relative overflow-hidden">
+            <div className="lg:col-span-5 p-8 rounded-none bg-secondary/50 border border-primary/20 flex flex-col justify-between text-left space-y-8 relative overflow-hidden">
               
-              {/* Background design elements */}
-              <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
-
               <div className="space-y-4">
                 <span className="text-xs font-mono uppercase text-primary tracking-widest block">Estimation Output</span>
 
@@ -291,7 +288,7 @@ export default function CalculatorPage() {
                   <div className="space-y-4">
                     <div className="space-y-1">
                       <span className="text-[10px] text-muted-foreground uppercase font-mono block">Estimated Pavers</span>
-                      <h2 className="text-4xl md:text-5xl font-display text-white font-bold">{paverCount.toLocaleString()} <span className="text-xs text-primary">pcs</span></h2>
+                      <h2 className="text-4xl md:text-5xl font-display text-foreground font-bold">{paverCount.toLocaleString()} <span className="text-xs text-primary">pcs</span></h2>
                     </div>
                     <p className="text-xs text-muted-foreground leading-relaxed">
                       Calculated for a total landscape coverage of {paverLength * paverWidth} sqm with an allowance of {paverWastage}% for perimeter cuts.
@@ -303,7 +300,7 @@ export default function CalculatorPage() {
                   <div className="space-y-4">
                     <div className="space-y-1">
                       <span className="text-[10px] text-muted-foreground uppercase font-mono block">Estimated Roof Tiles</span>
-                      <h2 className="text-4xl md:text-5xl font-display text-white font-bold">{roofTileCount.toLocaleString()} <span className="text-xs text-primary">pcs</span></h2>
+                      <h2 className="text-4xl md:text-5xl font-display text-foreground font-bold">{roofTileCount.toLocaleString()} <span className="text-xs text-primary">pcs</span></h2>
                     </div>
                     <p className="text-xs text-muted-foreground leading-relaxed">
                       Estimating double-sided pitch area of {Math.round(roofArea)} sqm (pitch factor {pitchFactor.toFixed(2)} based on {roofSlope}° slope).
@@ -315,7 +312,7 @@ export default function CalculatorPage() {
                   <div className="space-y-4">
                     <div className="space-y-1">
                       <span className="text-[10px] text-muted-foreground uppercase font-mono block">Estimated Terracotta Panels</span>
-                      <h2 className="text-4xl md:text-5xl font-display text-white font-bold">{facadePanelCount.toLocaleString()} <span className="text-xs text-primary">pcs</span></h2>
+                      <h2 className="text-4xl md:text-5xl font-display text-foreground font-bold">{facadePanelCount.toLocaleString()} <span className="text-xs text-primary">pcs</span></h2>
                     </div>
                     <p className="text-xs text-muted-foreground leading-relaxed">
                       Based on gross facade area {facadeWidth * facadeHeight} sqm. Net cladding area: {facadeNetArea} sqm after window deductions.
@@ -339,14 +336,14 @@ export default function CalculatorPage() {
               <div className="space-y-4">
                 <Link
                   href="/products"
-                  className="w-full py-3 rounded-lg bg-primary hover:bg-gold-light text-black text-center text-xs font-semibold tracking-wide flex items-center justify-center gap-1 transition-colors"
+                  className="w-full py-3 rounded-none bg-primary hover:bg-brick text-primary-foreground text-center text-xs font-semibold tracking-wide flex items-center justify-center gap-1 transition-colors"
                 >
                   Browse Spec Catalogs
                   <ArrowUpRight className="w-4.5 h-4.5" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="block text-center text-[10px] text-muted-foreground hover:text-white underline font-mono"
+                  className="block text-center text-[10px] text-muted-foreground hover:text-primary underline font-mono"
                 >
                   Request formal quotation breakdown
                 </Link>
