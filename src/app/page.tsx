@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Zap, RefreshCw, Compass, ArrowRight, ShieldCheck, Cpu } from "lucide-react";
+import { ArrowUpRight, Zap, RefreshCw, Compass, ArrowRight, ShieldCheck, Cpu, MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,9 +12,26 @@ import { mockProducts, Product } from "@/data/mockProducts";
 import { mockProjects } from "@/data/mockProjects";
 import { mockBlogs } from "@/data/mockBlogs";
 
+// Global reference project pins for the world map
+const globalPins = [
+  { id: "gp1", x: 20, y: 38, city: "New York", country: "USA", project: "Hudson Yards Terracotta Envelope", materials: "Linear Cladding Panels", year: 2024 },
+  { id: "gp2", x: 14, y: 52, city: "São Paulo", country: "Brazil", project: "Ibirapuera Cultural Pavilion", materials: "Handmade Facing Bricks", year: 2023 },
+  { id: "gp3", x: 47, y: 30, city: "London", country: "UK", project: "King's Cross Courtyard Blocks", materials: "Wire-cut Facing Bricks", year: 2025 },
+  { id: "gp4", x: 50, y: 28, city: "Berlin", country: "Germany", project: "Mitte Residential Complex", materials: "Glazed Terracotta Louvers", year: 2024 },
+  { id: "gp5", x: 55, y: 25, city: "Stockholm", country: "Sweden", project: "Södermalm Passive House", materials: "Insulating Facade Bricks", year: 2025 },
+  { id: "gp6", x: 54, y: 36, city: "Dubai", country: "UAE", project: "Palm Jumeirah Villa Estate", materials: "Desert Clay Pavers", year: 2024 },
+  { id: "gp7", x: 72, y: 40, city: "Mumbai", country: "India", project: "Bandra Arts District", materials: "Heritage Terracotta Tiles", year: 2023 },
+  { id: "gp8", x: 80, y: 44, city: "Singapore", country: "Singapore", project: "Marina Bay Cultural Centre", materials: "Baguette Sunscreens", year: 2025 },
+  { id: "gp9", x: 88, y: 56, city: "Sydney", country: "Australia", project: "Barangaroo Tower Facade", materials: "Platinum Glazed Louvers", year: 2024 },
+  { id: "gp10", x: 85, y: 34, city: "Tokyo", country: "Japan", project: "Shibuya Ceramic Residence", materials: "Micro-Format Clay Bricks", year: 2025 },
+  { id: "gp11", x: 49, y: 32, city: "Paris", country: "France", project: "La Défense Office Tower", materials: "Premium Cladding Panels", year: 2024 },
+  { id: "gp12", x: 53, y: 46, city: "Nairobi", country: "Kenya", project: "Karen Eco-Lodge", materials: "Compressed Earth Blocks", year: 2023 },
+];
+
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState<"all" | "facade" | "roof" | "brick" | "paver">("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [hoveredPin, setHoveredPin] = useState<string | null>(null);
 
   // Statistics counters simulation
   const [stats, setStats] = useState({ years: 0, projects: 0, efficiency: 0 });
@@ -48,19 +65,19 @@ export default function HomePage() {
   // Testimonial Cards for Carousel
   const testimonials = [
     {
-      quote: "Aura's terracotta cladding completely transformed our design for the Aero Sunshade Tower. Their mechanical tolerances and custom glazes are unmatched globally.",
+      quote: "PCP's terracotta cladding completely transformed our design for the Aero Sunshade Tower. Their mechanical tolerances and custom glazes are unmatched globally.",
       author: "Richard Rogers",
       role: "Lead Architect, WOHA Partners",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
     },
     {
-      quote: "The roman-format handmade bricks from Aura have a physical weight and organic texture that grounds our residential estate. It catches the Alpine shadows beautifully.",
+      quote: "The roman-format handmade bricks from Prayag Clay Production have a physical weight and organic texture that grounds our residential estate. It catches the Alpine shadows beautifully.",
       author: "Christine Kaufmann",
       role: "Principal, H&deM Studio",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
     },
     {
-      quote: "Achieving Cradle-to-Cradle certification on our roofing assemblies was direct and simple using Zenith's flat clay roof tiles. Outstanding sustainability standards.",
+      quote: "Achieving Cradle-to-Cradle certification on our roofing assemblies was direct and simple using PCP's flat clay roof tiles. Outstanding sustainability standards.",
       author: "Dr. Helena Schmidt",
       role: "Director of Passive Projects, Munich Green Lab",
       avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"
@@ -88,40 +105,47 @@ export default function HomePage() {
 
       <main className="space-y-32 bg-background text-foreground">
         {/* HERO SECTION */}
-        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-10 border-b border-border">
-          {/* Subtle architectural background grids */}
-          <div className="absolute inset-0 z-0 bg-[#FAF8F5]">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(74,44,29,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(74,44,29,0.03)_1px,transparent_1px)] bg-[size:32px_32px]" />
+        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden border-b border-border">
+          {/* Background image & dark cinematic overlay */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80"
+              alt="Premium Clay Architecture"
+              className="w-full h-full object-cover select-none pointer-events-none"
+            />
+            <div className="absolute inset-0 bg-black/60" />
           </div>
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-16">
             {/* Left Column: Typography & CTAs */}
             <div className="lg:col-span-7 space-y-8 text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none border border-primary/20 bg-primary/5 text-primary text-xs font-mono tracking-widest uppercase">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none border border-primary/30 bg-primary/10 text-primary text-xs font-mono tracking-widest uppercase">
                 <Compass className="w-3.5 h-3.5" />
-                Monumental Architectural Materials
+                Prayag Clay Production (PCP)
               </div>
-              <h1 className="heading-premium text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-foreground">
-                Designing for <br />
+              <h1 className="heading-premium text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-white">
+                Premium Brick Solutions <br />
                 <span className="text-primary">
-                  Generations.
+                  For Modern Architecture.
                 </span>
               </h1>
-              <p className="text-base sm:text-lg text-secondary-foreground leading-relaxed max-w-xl">
-                Experience high-performance, circular clay facade claddings, handmade masonry facing bricks, and double-interlocking storm-proof clay tiles crafted for sustainable luxury designs.
+              <p className="text-base sm:text-lg text-sand/85 leading-relaxed max-w-xl">
+                Experience high-performance clay facade claddings, handmade masonry facing bricks, and double-interlocking storm-proof tiles crafted by Prayag Clay Production for luxury international structures.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
                 <Link
                   href="/products"
                   className="px-6 py-3 rounded-none bg-primary hover:bg-brick text-white text-sm font-semibold tracking-wide flex items-center gap-2 transition-all duration-300 shadow-sm cursor-pointer"
+                  data-cursor="magnetic"
                 >
                   Explore Catalog
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/ai-visualizer"
-                  className="px-6 py-3 rounded-none border border-brown hover:bg-brown/5 text-brown text-sm font-semibold tracking-wide flex items-center gap-2 transition-all duration-300 cursor-pointer"
+                  className="px-6 py-3 rounded-none border border-stone/30 hover:bg-white/5 text-white text-sm font-semibold tracking-wide flex items-center gap-2 transition-all duration-300 cursor-pointer"
+                  data-cursor="magnetic"
                 >
                   <Cpu className="w-4 h-4 text-primary" />
                   Facade Visualizer
@@ -129,48 +153,42 @@ export default function HomePage() {
               </div>
 
               {/* Stat Counters */}
-              <div className="grid grid-cols-3 gap-6 pt-10 border-t border-border max-w-lg">
+              <div className="grid grid-cols-3 gap-6 pt-10 border-t border-white/10 max-w-lg">
                 <div>
                   <h3 className="text-3xl font-display font-semibold text-primary">{stats.years}+</h3>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono mt-1">Years Heritage</p>
+                  <p className="text-[10px] text-sand/60 uppercase tracking-widest font-mono mt-1">Years Heritage</p>
                 </div>
                 <div>
-                  <h3 className="text-3xl font-display font-semibold text-foreground">{stats.projects}+</h3>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono mt-1">Global Projects</p>
+                  <h3 className="text-3xl font-display font-semibold text-white">{stats.projects}+</h3>
+                  <p className="text-[10px] text-sand/60 uppercase tracking-widest font-mono mt-1">Global Projects</p>
                 </div>
                 <div>
-                  <h3 className="text-3xl font-display font-semibold text-foreground">{stats.efficiency}%</h3>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono mt-1">HVAC Offset</p>
+                  <h3 className="text-3xl font-display font-semibold text-white">{stats.efficiency}%</h3>
+                  <p className="text-[10px] text-sand/60 uppercase tracking-widest font-mono mt-1">HVAC Offset</p>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Floating Cards over high-end Image */}
-            <div className="lg:col-span-5 relative flex items-center justify-center">
-              <div className="relative w-full max-w-md aspect-[4/5] rounded-none overflow-hidden shadow-xl border border-border">
-                <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
-                  alt="Modern architectural cladding"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-darksec/60 via-transparent to-transparent" />
-              </div>
-
-              {/* Floating card */}
+            {/* Right Column: Floating Premium Details card */}
+            <div className="lg:col-span-5 relative flex items-center justify-end">
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                className="absolute -bottom-6 -left-6 md:-left-12 max-w-[280px] p-5 rounded-none bg-card border border-border shadow-lg space-y-3"
+                className="w-full max-w-[320px] p-6 rounded-none bg-black/40 border border-white/15 backdrop-blur-md shadow-2xl space-y-4 text-left"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-none bg-primary/10 flex items-center justify-center text-primary">
+                  <div className="w-8 h-8 rounded-none bg-primary/20 flex items-center justify-center text-primary">
                     <ShieldCheck className="w-4.5 h-4.5" />
                   </div>
-                  <h4 className="text-xs font-semibold text-foreground">Passive Durability</h4>
+                  <h4 className="text-xs font-semibold text-white">Passive Durability</h4>
                 </div>
-                <p className="text-[10px] text-muted-foreground leading-relaxed">
-                  Clay panels offer natural Class A1 fire protection and require zero washing or repainting routines.
+                <p className="text-[11px] text-sand/80 leading-relaxed">
+                  Clay panels offer natural Class A1 fire protection and require zero washing or repainting routines. Engineered for a lifespan of over 150 years.
                 </p>
+                <div className="pt-2 border-t border-white/10 flex justify-between items-center text-[9px] font-mono text-sand/60">
+                  <span>SPECIFICATION</span>
+                  <span className="text-primary">Cradle to Cradle</span>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -222,6 +240,7 @@ export default function HomePage() {
                   transition={{ duration: 0.4 }}
                   onClick={() => setSelectedProduct(p)}
                   className="break-inside-avoid relative rounded-none overflow-hidden border border-border group cursor-pointer shadow-md"
+                  data-cursor="explore"
                 >
                   <img
                     src={p.images[0]}
@@ -247,7 +266,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
             <div className="space-y-4 text-left">
               <h2 className="subheading-monochrome">Featured Projects</h2>
-              <h3 className="heading-premium text-3xl md:text-4xl text-foreground font-semibold">Landmarks Built With Aura Materials</h3>
+              <h3 className="heading-premium text-3xl md:text-4xl text-foreground font-semibold">Landmarks Built With PCP Materials</h3>
             </div>
             <Link
               href="/projects"
@@ -265,6 +284,7 @@ export default function HomePage() {
                 key={proj.id}
                 href={`/projects/${proj.id}`}
                 className="flex-shrink-0 w-80 md:w-[480px] rounded-none overflow-hidden border border-border hover:border-primary/30 bg-card p-4 transition-all duration-300 group shadow-sm"
+                data-cursor="view"
               >
                 <div className="relative aspect-[16/10] rounded-none overflow-hidden border border-border">
                   <img
@@ -287,6 +307,123 @@ export default function HomePage() {
                 </div>
               </Link>
             ))}
+          </div>
+        </section>
+
+        {/* GLOBAL REFERENCE MAP */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="space-y-4 text-center">
+            <h2 className="subheading-monochrome">Global Footprint</h2>
+            <h3 className="heading-premium text-3xl md:text-4xl text-foreground font-semibold">Reference Projects Worldwide</h3>
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+              PCP materials are specified by architects and builders across 6 continents. Explore our global project references.
+            </p>
+          </div>
+
+          {/* Interactive SVG Map */}
+          <div className="relative bg-darksec border border-white/10 p-6 md:p-10 overflow-hidden">
+            {/* SVG World Map */}
+            <svg
+              viewBox="0 0 100 60"
+              className="w-full h-auto"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* Simplified world continents */}
+              {/* North America */}
+              <path d="M5,15 L8,12 L12,10 L18,10 L24,12 L26,16 L28,22 L26,28 L22,32 L18,34 L16,38 L14,36 L10,34 L8,30 L6,24 L5,20 Z" fill="#2A2A2A" stroke="#444" strokeWidth="0.15" />
+              {/* South America */}
+              <path d="M16,38 L18,36 L22,38 L24,42 L22,48 L20,54 L18,58 L14,56 L12,50 L14,44 Z" fill="#2A2A2A" stroke="#444" strokeWidth="0.15" />
+              {/* Europe */}
+              <path d="M44,12 L48,10 L52,10 L56,12 L56,18 L54,22 L50,26 L48,28 L44,26 L42,22 L42,16 Z" fill="#2A2A2A" stroke="#444" strokeWidth="0.15" />
+              {/* Africa */}
+              <path d="M42,28 L48,28 L54,30 L56,36 L56,44 L54,50 L50,54 L46,52 L42,46 L40,38 L42,32 Z" fill="#2A2A2A" stroke="#444" strokeWidth="0.15" />
+              {/* Asia */}
+              <path d="M56,10 L62,8 L70,10 L78,12 L86,14 L88,20 L86,28 L82,32 L76,36 L70,38 L64,36 L58,32 L56,26 L56,18 Z" fill="#2A2A2A" stroke="#444" strokeWidth="0.15" />
+              {/* India subcontinent */}
+              <path d="M66,36 L72,34 L76,38 L74,44 L70,46 L66,42 Z" fill="#2A2A2A" stroke="#444" strokeWidth="0.15" />
+              {/* Southeast Asia / Indonesia */}
+              <path d="M76,38 L82,36 L86,40 L84,44 L78,44 Z" fill="#2A2A2A" stroke="#444" strokeWidth="0.15" />
+              {/* Australia */}
+              <path d="M82,48 L90,46 L96,50 L94,56 L88,58 L82,56 L80,52 Z" fill="#2A2A2A" stroke="#444" strokeWidth="0.15" />
+              {/* Japan */}
+              <path d="M84,24 L86,22 L88,24 L88,30 L86,32 L84,28 Z" fill="#2A2A2A" stroke="#444" strokeWidth="0.15" />
+
+              {/* Grid lines (subtle latitude/longitude) */}
+              {[15, 30, 45].map((y) => (
+                <line key={`h-${y}`} x1="0" y1={y} x2="100" y2={y} stroke="#333" strokeWidth="0.05" strokeDasharray="0.5,0.5" />
+              ))}
+              {[25, 50, 75].map((x) => (
+                <line key={`v-${x}`} x1={x} y1="0" x2={x} y2="60" stroke="#333" strokeWidth="0.05" strokeDasharray="0.5,0.5" />
+              ))}
+
+              {/* Project Pins */}
+              {globalPins.map((pin, idx) => (
+                <g
+                  key={pin.id}
+                  onMouseEnter={() => setHoveredPin(pin.id)}
+                  onMouseLeave={() => setHoveredPin(null)}
+                  className="cursor-pointer"
+                >
+                  {/* Pulse ring */}
+                  <circle cx={pin.x} cy={pin.y} r="1.2" fill="none" stroke="#A14F2A" strokeWidth="0.15" opacity="0.4">
+                    <animate attributeName="r" from="0.6" to="2" dur={`${2 + idx * 0.3}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" from="0.6" to="0" dur={`${2 + idx * 0.3}s`} repeatCount="indefinite" />
+                  </circle>
+                  {/* Pin dot */}
+                  <circle cx={pin.x} cy={pin.y} r="0.6" fill="#A14F2A" stroke="#FAF8F5" strokeWidth="0.15" />
+                </g>
+              ))}
+            </svg>
+
+            {/* Hover Tooltips rendered as HTML overlays */}
+            <AnimatePresence>
+              {hoveredPin && (() => {
+                const pin = globalPins.find(p => p.id === hoveredPin);
+                if (!pin) return null;
+                return (
+                  <motion.div
+                    key={pin.id}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 5 }}
+                    className="absolute pointer-events-none z-20"
+                    style={{
+                      left: `${pin.x}%`,
+                      top: `${pin.y - 2}%`,
+                      transform: "translate(-50%, -100%)",
+                    }}
+                  >
+                    <div className="bg-card border border-border shadow-xl p-4 space-y-2 w-56">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                        <span className="text-[10px] font-mono text-primary uppercase tracking-widest font-semibold">{pin.city}, {pin.country}</span>
+                      </div>
+                      <h4 className="text-xs font-semibold text-foreground leading-snug">{pin.project}</h4>
+                      <div className="flex justify-between text-[9px] text-muted-foreground font-mono pt-1 border-t border-border">
+                        <span>{pin.materials}</span>
+                        <span className="text-primary font-semibold">{pin.year}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })()}
+            </AnimatePresence>
+
+            {/* Summary Bar */}
+            <div className="mt-6 grid grid-cols-3 gap-4 border-t border-white/10 pt-6">
+              <div className="text-center">
+                <p className="text-2xl font-display font-semibold text-primary">{globalPins.length}+</p>
+                <p className="text-[10px] text-sand/60 uppercase tracking-widest font-mono mt-1">Reference Projects</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-display font-semibold text-white">6</p>
+                <p className="text-[10px] text-sand/60 uppercase tracking-widest font-mono mt-1">Continents</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-display font-semibold text-white">30+</p>
+                <p className="text-[10px] text-sand/60 uppercase tracking-widest font-mono mt-1">Countries</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -354,7 +491,7 @@ export default function HomePage() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 pb-12">
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
             <div className="space-y-4 text-left">
-              <h2 className="subheading-monochrome">Aura Bulletin</h2>
+              <h2 className="subheading-monochrome">PCP Bulletin</h2>
               <h3 className="heading-premium text-3xl text-foreground font-semibold font-display">Insights & Building Tech</h3>
             </div>
             <Link
@@ -372,6 +509,7 @@ export default function HomePage() {
                 key={b.slug}
                 href={`/blog/${b.slug}`}
                 className="flex flex-col rounded-none overflow-hidden border border-border bg-card hover:border-primary/30 transition-all duration-300 group shadow-sm"
+                data-cursor="view"
               >
                 <div className="relative aspect-[16/10] overflow-hidden border-b border-border">
                   <img

@@ -248,7 +248,7 @@ export default function BrickCalculator() {
 
   // Export Share Summary
   const handleShare = () => {
-    const text = `AURA Material Estimate Report\n
+    const text = `Prayag Clay Production (PCP) - Material Estimate Report\n
 Project Profile summary:\n
 - Unit System: ${unit}
 - Wall Surface Area (Net): ${results.netWallArea.toFixed(2)} ${results.areaUnit}

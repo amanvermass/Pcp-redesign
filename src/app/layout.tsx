@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import { ArchitectProvider } from "@/providers/ArchitectProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,8 +16,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "AURA | Monumental Architectural Materials & Solutions",
-  description: "Experience premium, sustainable architectural facade claddings, clay roof tiles, paving blocks, and bricks. Designed for luxury, built for generations.",
+  title: "PCP India | Prayag Clay Production | Premium Architectural Bricks & Facades",
+  description: "Experience premium, sustainable architectural facade claddings, clay roof tiles, paving blocks, and bricks by Prayag Clay Production (PCP). Designed for luxury, built for generations.",
 };
 
 export default function RootLayout({
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased font-sans bg-background text-foreground`}
       >
-        {children}
+        <ArchitectProvider>
+          {children}
+        </ArchitectProvider>
       </body>
     </html>
   );

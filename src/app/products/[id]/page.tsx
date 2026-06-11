@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { ArrowLeft, Download, Send, RefreshCw, Check, Layers, ShieldCheck, Mail, Calculator } from "lucide-react";
+import { ArrowLeft, Download, Send, RefreshCw, Check, Layers, ShieldCheck, Mail, Calculator, Thermometer, Volume2, Flame, Box, FileDown } from "lucide-react";
+import { useArchitectMode } from "@/providers/ArchitectProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,6 +16,7 @@ import { mockProducts } from "@/data/mockProducts";
 export default function ProductDetailPage() {
   const { id } = useParams() as { id: string };
   const product = mockProducts.find((p) => p.id === id);
+  const { isArchitectMode } = useArchitectMode();
 
   // Gallery state
   const [selectedImage, setSelectedImage] = useState(product?.images[0] || "");
@@ -25,6 +27,8 @@ export default function ProductDetailPage() {
   const [inquirySubmitted, setInquirySubmitted] = useState(false);
   const [inquiryEmail, setInquiryEmail] = useState("");
   const [inquiryMsg, setInquiryMsg] = useState("");
+  // Texture export state
+  const [textureExportTriggered, setTextureExportTriggered] = useState(false);
 
   // Product Comparison state (stored in local storage/react state)
   const [comparisonList, setComparisonList] = useState<string[]>([]);
@@ -80,7 +84,7 @@ export default function ProductDetailPage() {
     <>
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20 font-sans bg-background text-foreground">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-20 font-sans bg-background text-foreground">
         
         {/* Back Link */}
         <div className="text-left">
@@ -272,6 +276,181 @@ export default function ProductDetailPage() {
             </div>
           </div>
         </div>
+
+        {/* ARCHITECT MODE — Advanced Thermal / Acoustic / Fire Specs */}
+        <AnimatePresence>
+          {isArchitectMode && product.uValue && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="border-t border-primary/20 pt-16 space-y-8 overflow-hidden"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-primary/10 flex items-center justify-center border border-primary/20">
+                  <ShieldCheck className="w-4 h-4 text-primary" />
+                </div>
+                <div>
+                  <h3 className="heading-premium text-2xl text-foreground font-semibold">Architect Specifier Data</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">EN / ISO certified performance parameters for specification documents.</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {/* Thermal */}
+                <div className="bg-card p-5 border border-border space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Thermometer className="w-4 h-4 text-primary" />
+                    <span className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest font-semibold">Thermal U-Value</span>
+                  </div>
+                  <p className="text-xl font-display font-semibold text-foreground">{product.uValue}</p>
+                  {product.thermalConductivity && (
+                    <p className="text-[10px] text-muted-foreground font-mono">λ = {product.thermalConductivity}</p>
+                  )}
+                </div>
+
+                {/* Acoustic */}
+                <div className="bg-card p-5 border border-border space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Volume2 className="w-4 h-4 text-primary" />
+                    <span className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest font-semibold">Acoustic Rating</span>
+                  </div>
+                  <p className="text-xl font-display font-semibold text-foreground">{product.acousticRating || "N/A"}</p>
+                  <p className="text-[10px] text-muted-foreground font-mono">Sound reduction index (Rw)</p>
+                </div>
+
+                {/* Fire */}
+                <div className="bg-card p-5 border border-border space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Flame className="w-4 h-4 text-primary" />
+                    <span className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest font-semibold">Fire Resistance</span>
+                  </div>
+                  <p className="text-xl font-display font-semibold text-foreground">{product.fireRating || "N/A"}</p>
+                  <p className="text-[10px] text-muted-foreground font-mono">EN 13501-1 Classification</p>
+                </div>
+
+                {/* Compressive */}
+                <div className="bg-card p-5 border border-border space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Layers className="w-4 h-4 text-primary" />
+                    <span className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest font-semibold">Compressive</span>
+                  </div>
+                  <p className="text-xl font-display font-semibold text-foreground">{product.compressiveStrength}</p>
+                  <p className="text-[10px] text-muted-foreground font-mono">EN 772-1 Test Method</p>
+                </div>
+              </div>
+
+              {/* CAD Texture Exporter */}
+              {product.cadTexture && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  {/* Texture Preview Card */}
+                  <div className="lg:col-span-7 bg-card border border-border p-6 space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Box className="w-4 h-4 text-primary" />
+                        <h4 className="text-sm font-semibold text-foreground">3D / CAD Texture Package</h4>
+                      </div>
+                      <span className="text-[9px] text-primary font-mono uppercase tracking-widest font-semibold bg-primary/10 px-2 py-1 border border-primary/20">
+                        {product.cadTexture.resolution}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-6">
+                      {/* Albedo Swatch */}
+                      <div className="space-y-2">
+                        <div
+                          className="w-full aspect-square border border-border"
+                          style={{ backgroundColor: product.cadTexture.albedo }}
+                        />
+                        <p className="text-[10px] font-mono text-muted-foreground text-center">ALBEDO</p>
+                        <p className="text-[10px] font-mono text-foreground text-center">{product.cadTexture.albedo}</p>
+                      </div>
+
+                      {/* Roughness */}
+                      <div className="space-y-2">
+                        <div className="w-full aspect-square border border-border bg-gradient-to-b from-neutral-800 to-neutral-300 flex items-center justify-center">
+                          <span className="text-2xl font-display font-bold text-white">{product.cadTexture.roughness}</span>
+                        </div>
+                        <p className="text-[10px] font-mono text-muted-foreground text-center">ROUGHNESS</p>
+                        <p className="text-[10px] font-mono text-foreground text-center">{(product.cadTexture.roughness * 100).toFixed(0)}%</p>
+                      </div>
+
+                      {/* Metalness */}
+                      <div className="space-y-2">
+                        <div className="w-full aspect-square border border-border bg-gradient-to-b from-neutral-600 to-neutral-100 flex items-center justify-center">
+                          <span className="text-2xl font-display font-bold text-neutral-800">{product.cadTexture.metalness}</span>
+                        </div>
+                        <p className="text-[10px] font-mono text-muted-foreground text-center">METALNESS</p>
+                        <p className="text-[10px] font-mono text-foreground text-center">{(product.cadTexture.metalness * 100).toFixed(0)}%</p>
+                      </div>
+                    </div>
+
+                    {/* Map chips */}
+                    <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
+                      {product.cadTexture.maps.map((mapType) => (
+                        <span
+                          key={mapType}
+                          className="px-3 py-1.5 text-[10px] font-mono bg-sand/40 border border-border text-foreground uppercase tracking-wider font-semibold"
+                        >
+                          {mapType}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Export Action Card */}
+                  <div className="lg:col-span-5 bg-darksec border border-white/10 p-6 space-y-6 flex flex-col justify-between">
+                    <div className="space-y-4">
+                      <h4 className="text-sm font-semibold text-white">Download Texture Package</h4>
+                      <p className="text-xs text-sand/70 leading-relaxed">
+                        Export seamless PBR textures optimized for Revit, ArchiCAD, SketchUp, 3ds Max, V-Ray, and Unreal Engine.
+                        Package includes all maps at {product.cadTexture.resolution} resolution.
+                      </p>
+                      <div className="space-y-2 text-[10px] text-sand/60 font-mono">
+                        <div className="flex justify-between py-1.5 border-b border-white/5">
+                          <span>Format</span>
+                          <span className="text-white">.ZIP (PNG + EXR)</span>
+                        </div>
+                        <div className="flex justify-between py-1.5 border-b border-white/5">
+                          <span>Maps Included</span>
+                          <span className="text-white">{product.cadTexture.maps.length} Maps</span>
+                        </div>
+                        <div className="flex justify-between py-1.5 border-b border-white/5">
+                          <span>Estimated Size</span>
+                          <span className="text-white">~48 MB</span>
+                        </div>
+                        <div className="flex justify-between py-1.5">
+                          <span>License</span>
+                          <span className="text-primary">Royalty-Free</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        setTextureExportTriggered(true);
+                        setTimeout(() => setTextureExportTriggered(false), 3000);
+                      }}
+                      className="w-full py-3 bg-primary hover:bg-brick text-white text-sm font-semibold tracking-wide flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                    >
+                      {textureExportTriggered ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          Package Ready — Downloading
+                        </>
+                      ) : (
+                        <>
+                          <FileDown className="w-4 h-4" />
+                          Export Texture Package
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* RELATED PRODUCTS */}
         {relatedProducts.length > 0 && (

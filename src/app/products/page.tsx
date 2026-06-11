@@ -76,7 +76,7 @@ export default function ProductsPage() {
     <>
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8 font-sans bg-background text-foreground">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-8 font-sans bg-background text-foreground">
         {/* Header Text */}
         <div className="space-y-3 text-left">
           <div className="inline-flex items-center gap-1 text-xs font-mono text-primary uppercase tracking-widest font-semibold">
@@ -366,6 +366,7 @@ export default function ProductsPage() {
                           exit={{ opacity: 0, y: 15 }}
                           transition={{ duration: 0.3 }}
                           className="flex flex-col rounded-none overflow-hidden border border-border bg-card hover:border-primary/30 transition-all duration-300 group shadow-sm"
+                          data-cursor="view"
                         >
                           <div className="relative aspect-[4/3] overflow-hidden bg-sand">
                             <img
@@ -425,6 +426,7 @@ export default function ProductsPage() {
                           exit={{ opacity: 0, x: -15 }}
                           transition={{ duration: 0.3 }}
                           className="flex flex-col sm:flex-row gap-6 p-4 rounded-none border border-border bg-card hover:border-primary/30 transition-all duration-300 text-left group shadow-sm"
+                          data-cursor="view"
                         >
                           <div className="relative w-full sm:w-44 aspect-[4/3] sm:aspect-square rounded-none overflow-hidden bg-sand flex-shrink-0 border border-border">
                             <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover" />

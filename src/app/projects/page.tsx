@@ -53,7 +53,7 @@ export default function ProjectsPage() {
     <>
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10 font-sans bg-background text-foreground">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-10 font-sans bg-background text-foreground">
         
         {/* Header Text */}
         <div className="space-y-3 text-left">
@@ -215,6 +215,7 @@ export default function ProjectsPage() {
                   exit={{ opacity: 0, y: 15 }}
                   transition={{ duration: 0.3 }}
                   className="rounded-none overflow-hidden border border-border bg-card hover:border-primary/30 transition-all duration-300 group flex flex-col justify-between text-left shadow-sm"
+                  data-cursor="view"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden bg-sand border-b border-border">
                     <img src={proj.images[0]} alt={proj.title} className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" />

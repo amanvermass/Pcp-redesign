@@ -54,7 +54,7 @@ export default function BlogDetailPage() {
 
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16 font-sans">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-16 font-sans">
         
         {/* Back Link */}
         <div className="text-left">
@@ -144,6 +144,7 @@ export default function BlogDetailPage() {
                   key={b.slug}
                   href={`/blog/${b.slug}`}
                   className="flex flex-col md:flex-row gap-6 p-4 rounded-none border border-border bg-card hover:border-primary/50 transition-all duration-300 text-left group shadow-sm"
+                  data-cursor="view"
                 >
                   <div className="relative w-full md:w-36 aspect-[16/10] md:aspect-square rounded-none overflow-hidden bg-muted flex-shrink-0">
                     <img src={b.coverImage} alt="" className="w-full h-full object-cover" />

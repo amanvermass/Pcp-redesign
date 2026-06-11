@@ -38,7 +38,7 @@ export default function BlogListingPage() {
     <>
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20 font-sans bg-background text-foreground">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-20 font-sans bg-background text-foreground">
         
         {/* Header Title */}
         <div className="space-y-3 text-left">
@@ -46,7 +46,7 @@ export default function BlogListingPage() {
             <BookOpen className="w-3.5 h-3.5" />
             Insights & Material Bulletins
           </div>
-          <h1 className="heading-premium text-4xl md:text-5xl text-foreground font-semibold font-display">AURA Journal</h1>
+          <h1 className="heading-premium text-4xl md:text-5xl text-foreground font-semibold font-display">PCP Journal</h1>
           <p className="text-sm text-muted-foreground max-w-xl">
             Explore advanced articles on passive architecture, clinker clay physics, cradle-to-cradle sourcing, and green building envelopes.
           </p>
@@ -57,6 +57,7 @@ export default function BlogListingPage() {
           <Link
             href={`/blog/${featuredArticle.slug}`}
             className="block rounded-none overflow-hidden border border-border bg-card hover:border-primary/30 transition-all duration-500 group text-left shadow-md"
+            data-cursor="view"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
               <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto min-h-[300px] overflow-hidden border-r border-border">
@@ -144,6 +145,7 @@ export default function BlogListingPage() {
                     key={b.slug}
                     href={`/blog/${b.slug}`}
                     className="flex flex-col rounded-none overflow-hidden border border-border bg-card hover:border-primary/30 transition-all duration-300 group shadow-sm"
+                    data-cursor="view"
                   >
                     <div className="relative aspect-[16/10] overflow-hidden border-b border-border">
                       <img src={b.coverImage} alt={b.title} className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" />
@@ -178,6 +180,7 @@ export default function BlogListingPage() {
                     key={trend.slug}
                     href={`/blog/${trend.slug}`}
                     className="flex gap-4 group cursor-pointer"
+                    data-cursor="view"
                   >
                     <div className="text-2xl font-display font-bold text-primary/30 group-hover:text-primary transition-colors">
                       {String(idx + 1).padStart(2, "0")}

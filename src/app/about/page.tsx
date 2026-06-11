@@ -37,7 +37,7 @@ export default function AboutPage() {
         <section className="relative w-full h-[50vh] flex items-center justify-center overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
-            alt="Aura manufacturing"
+            alt="PCP manufacturing"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-[#1C1C1C]/60" />
@@ -55,9 +55,9 @@ export default function AboutPage() {
         {/* Company Story & Vision */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 text-left">
           <div className="lg:col-span-7 space-y-6">
-            <h2 className="heading-premium text-3xl text-foreground font-semibold">The Story of AURA</h2>
+            <h2 className="heading-premium text-3xl text-foreground font-semibold">The Story of Prayag Clay Production</h2>
             <p className="text-sm md:text-base text-secondary-foreground leading-relaxed">
-              Founded at the intersection of geology, architecture, and technology, AURA manufactures architectural clay products. We create building envelopes that act as active, passive filters, bridging classic craftsmanship and modern facades.
+              Founded at the intersection of geology, architecture, and technology, Prayag Clay Production (PCP) manufactures architectural clay products. We create building envelopes that act as active, passive filters, bridging classic craftsmanship and modern facades.
             </p>
             <p className="text-sm md:text-base text-secondary-foreground leading-relaxed">
               Our brickworks extract rich clay veins locally. Every terracotta baguette, clinker block, and interlocking roof panel is extruded and fired under carbon-controlled kilns, ensuring structural durability with minimal ecological impact.

@@ -182,7 +182,7 @@ export default function InspirationHub() {
     <>
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12 font-sans bg-background text-foreground">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-12 font-sans bg-background text-foreground">
         
         {/* Header Title */}
         <div className="space-y-3 text-left">
@@ -225,6 +225,7 @@ export default function InspirationHub() {
             <div
               key={item.id}
               className="break-inside-avoid relative rounded-none overflow-hidden border border-border bg-card group shadow-md"
+              data-cursor="explore"
             >
               {/* Image */}
               <img src={item.image} alt={item.title} className="w-full object-cover" />

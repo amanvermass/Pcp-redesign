@@ -22,6 +22,19 @@ export interface Product {
   tags: string[];
   priceEstimate: string; // e.g. "$$ - Premium"
   coverage: string; // e.g. "48 bricks per sqm"
+  
+  // New international architect spec fields:
+  uValue?: string; // Thermal transmittance (W/m²K)
+  thermalConductivity?: string; // Lambda value (W/mK)
+  acousticRating?: string; // Sound reduction index (dB)
+  fireRating?: string; // Fire resistance class
+  cadTexture?: {
+    albedo: string; // Hex albedo color
+    roughness: number; // 0.0 to 1.0
+    metalness: number; // 0.0 to 1.0
+    resolution: string; // Resolution standard
+    maps: string[]; // Map file types included
+  };
 }
 
 export const mockProducts: Product[] = [
@@ -60,7 +73,18 @@ export const mockProducts: Product[] = [
     ],
     tags: ["Commercial", "Modern", "Ventilated", "Temperate", "Arid"],
     priceEstimate: "$$$ - Luxury",
-    coverage: "2.78 panels per sqm"
+    coverage: "2.78 panels per sqm",
+    uValue: "0.24 W/m²K",
+    thermalConductivity: "0.13 W/mK",
+    acousticRating: "38 dB Rw",
+    fireRating: "Class A1 (EN 13501-1, Non-Combustible)",
+    cadTexture: {
+      albedo: "#8A5A36",
+      roughness: 0.85,
+      metalness: 0.0,
+      resolution: "4K Seamless PBR",
+      maps: ["Albedo", "Normal", "Roughness", "Ambient Occlusion", "Displacement"]
+    }
   },
   {
     id: "glazed-louver-2",
@@ -95,7 +119,18 @@ export const mockProducts: Product[] = [
     ],
     tags: ["Commercial", "Minimalist", "Sunshade", "Tropical", "Arid"],
     priceEstimate: "$$$$ - Super Luxury",
-    coverage: "Custom basis"
+    coverage: "Custom basis",
+    uValue: "N/A (External Screen)",
+    thermalConductivity: "0.18 W/mK",
+    acousticRating: "N/A",
+    fireRating: "Class A1 (EN 13501-1)",
+    cadTexture: {
+      albedo: "#A8A9AD",
+      roughness: 0.15,
+      metalness: 0.95,
+      resolution: "4K Seamless PBR",
+      maps: ["Albedo", "Normal", "Roughness", "Metallic", "Gloss"]
+    }
   },
   {
     id: "heritage-pantile-1",
@@ -131,7 +166,18 @@ export const mockProducts: Product[] = [
     ],
     tags: ["Residential", "Classic", "Waterproof", "Tropical", "Cold"],
     priceEstimate: "$$ - Premium",
-    coverage: "12.5 tiles per sqm"
+    coverage: "12.5 tiles per sqm",
+    uValue: "0.32 W/m²K (Assembled)",
+    thermalConductivity: "0.12 W/mK",
+    acousticRating: "44 dB Rw (System)",
+    fireRating: "Class A1 (EN 13501-1)",
+    cadTexture: {
+      albedo: "#B34A33",
+      roughness: 0.9,
+      metalness: 0.0,
+      resolution: "4K Seamless PBR",
+      maps: ["Albedo", "Normal", "Roughness", "Height"]
+    }
   },
   {
     id: "flat-slate-roof-2",
@@ -165,7 +211,18 @@ export const mockProducts: Product[] = [
     ],
     tags: ["Residential", "Minimalist", "Monolithic", "Temperate", "Cold"],
     priceEstimate: "$$$ - Luxury",
-    coverage: "10.8 tiles per sqm"
+    coverage: "10.8 tiles per sqm",
+    uValue: "0.29 W/m²K (Assembled)",
+    thermalConductivity: "0.14 W/mK",
+    acousticRating: "46 dB Rw (System)",
+    fireRating: "Class A1 (EN 13501-1)",
+    cadTexture: {
+      albedo: "#22252A",
+      roughness: 0.75,
+      metalness: 0.1,
+      resolution: "4K Seamless PBR",
+      maps: ["Albedo", "Normal", "Roughness", "Ambient Occlusion", "Height"]
+    }
   },
   {
     id: "handmade-longformat-1",
@@ -200,7 +257,18 @@ export const mockProducts: Product[] = [
     ],
     tags: ["Residential", "Commercial", "Brutalist", "Contemporary", "Temperate"],
     priceEstimate: "$$$ - Luxury",
-    coverage: "41 bricks per sqm"
+    coverage: "41 bricks per sqm",
+    uValue: "0.58 W/m²K (Double Leaf)",
+    thermalConductivity: "0.22 W/mK",
+    acousticRating: "52 dB Rw (Wall)",
+    fireRating: "Class A1 (Non-Combustible Structural)",
+    cadTexture: {
+      albedo: "#8A4F41",
+      roughness: 0.95,
+      metalness: 0.0,
+      resolution: "4K Seamless PBR",
+      maps: ["Albedo", "Normal", "Roughness", "Displacement", "Bump"]
+    }
   },
   {
     id: "engineered-clinker-2",
@@ -233,7 +301,18 @@ export const mockProducts: Product[] = [
     ],
     tags: ["Commercial", "Brutalist", "High-Durability", "Cold", "Tropical"],
     priceEstimate: "$$ - Premium",
-    coverage: "48 bricks per sqm"
+    coverage: "48 bricks per sqm",
+    uValue: "0.65 W/m²K",
+    thermalConductivity: "0.28 W/mK",
+    acousticRating: "55 dB Rw (Wall)",
+    fireRating: "Class A1 (Structural Heavy Load)",
+    cadTexture: {
+      albedo: "#4C3F34",
+      roughness: 0.65,
+      metalness: 0.3,
+      resolution: "4K Seamless PBR",
+      maps: ["Albedo", "Normal", "Roughness", "Metalness", "Displacement"]
+    }
   },
   {
     id: "clay-paver-premium-1",
@@ -268,6 +347,17 @@ export const mockProducts: Product[] = [
     ],
     tags: ["Residential", "Commercial", "Landscape", "Tropical", "Arid"],
     priceEstimate: "$$ - Premium",
-    coverage: "48 pavers per sqm"
+    coverage: "48 pavers per sqm",
+    uValue: "N/A (Ground Paver)",
+    thermalConductivity: "0.20 W/mK",
+    acousticRating: "N/A",
+    fireRating: "Class A1 (Floor Ramps)",
+    cadTexture: {
+      albedo: "#A05A42",
+      roughness: 0.9,
+      metalness: 0.0,
+      resolution: "4K Seamless PBR",
+      maps: ["Albedo", "Normal", "Roughness", "Ambient Occlusion", "Displacement"]
+    }
   }
 ];
